@@ -86,7 +86,7 @@
   .fetus-img-wrap img { max-width: 280px; max-height: 280px; border-radius: 8px; display: block; }
   .ruler-info { margin-top: 10px; font-size: 13px; color: var(--text-light); }
 
-  /* ====== A3 Print Card ====== */
+  /* Print Preview */
   .a3-card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; margin-bottom: 16px; }
   .a3-card h3 { font-size: 16px; color: var(--pink); margin-bottom: 12px; text-align: center; }
 
@@ -94,16 +94,10 @@
     background: white;
     border: 2px dashed #E0E0E0;
     border-radius: 8px;
-    /* A3 landscape: 420mm wide x 297mm tall */
-    width: 420mm;
-    min-height: 297mm;
-    padding: 12mm 15mm;
-    position: relative;
-    overflow: hidden;
-    transform-origin: top left;
-    /* Scale down on screen to fit */
-    transform: scale(0.45);
-    margin-bottom: -140mm; /* compensate for scaled space */
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .a3-title {
@@ -253,7 +247,7 @@
   .btn-print { background: var(--card-bg); color: var(--pink); border: 2px solid var(--pink) !important; }
   .footer { text-align: center; padding: 24px; font-size: 12px; color: #CCC; }
 
-  /* Print: A3 landscape */
+  /* Print: simple centered baby image + label */
   @media print {
     body { background: white !important; padding: 0 !important; margin: 0 !important; }
     .header, .form-section, .result-section > *:not(#a3PrintCard), .action-btns, .footer { display: none !important; }
@@ -264,12 +258,12 @@
       border: none !important;
       transform: none !important;
       margin: 0 !important;
-      width: 420mm !important;
-      min-height: 297mm !important;
-      padding: 12mm 15mm !important;
+      width: 100% !important;
+      min-height: auto !important;
+      padding: 0 !important;
     }
     .no-print { display: none !important; }
-    @page { size: A3 landscape; margin: 0; }
+    @page { size: A4 portrait; margin: 15mm; }
   }
 
   @media (max-width: 480px) {
@@ -332,8 +326,8 @@
   </div>
 
   <!-- A3 Print Area -->
-  <div class="a3-card no-print" id="a3PrintCard">
-    <h3>📄 A3 打印预览（横向）</h3>
+  <div class="a3-card" id="a3PrintCard">
+    <h3>📄 打印预览</h3>
     <div class="a3-preview" id="a3Preview"></div>
   </div>
 
@@ -479,89 +473,23 @@ function showResults(r, comp, fetusImg, bpd, hc, ac, fl) {
   section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ====== A3 Layout with REAL cm units ======
+// ====== A3 Layout: baby image + size label only ======
 function generateA3(week, length, weight, comp, bpd, hc, ac, fl, fetusImg) {
-  const ws = weight >= 1000 ? (weight/1000).toFixed(1)+' kg' : weight+' g';
   const preview = document.getElementById('a3Preview');
 
-  // A3 landscape usable area: ~390mm wide x 273mm tall (minus margins)
-  // Left panel: ruler (12mm) + gap (3mm) + image area (~60mm) = ~75mm
-  // Right panel: rest = ~315mm
-
-  // The fetus image height in cm (use actual length, cap at 27cm to fit)
-  const displayCm = Math.min(length, 27);
-
-  // Build ruler ticks
-  let rulerHTML = '';
-  for (let i = 0; i <= displayCm + 2; i++) {
-    const cls = i % 5 === 0 ? 'cm-tick major' : 'cm-tick';
-    const label = i % 2 === 0 ? `<span class="cm-label">${i}</span>` : '';
-    rulerHTML += `<div class="${cls}" style="bottom:${i}cm">${label}</div>`;
-  }
-
-  // Build horizontal ruler (show up to length+5 cm)
-  const hRulerCm = Math.min(length + 5, 55);
-  let hRulerHTML = '';
-  for (let i = 0; i <= hRulerCm; i++) {
-    const cls = i % 5 === 0 ? 'ht major' : 'ht';
-    const left = (i / hRulerCm * 100).toFixed(2);
-    const label = i % 2 === 0 ? `<span class="hl">${i}cm</span>` : '';
-    hRulerHTML += `<div class="${cls}" style="left:${left}%">${label}</div>`;
-  }
-
   preview.innerHTML = `
-    <div class="a3-title">🍼 你的宝宝 ${week} 周啦！</div>
-    <div class="a3-subtitle">宝宝真实大小纪念卡 · 打印后标尺为实际厘米 (A3 横向) · ${new Date().toLocaleDateString('zh-CN')}</div>
-
-    <div class="a3-main">
-      <!-- Left: Real-size ruler + fetus image -->
-      <div class="a3-left">
-        <div class="cm-ruler" style="height:${displayCm}cm">
-          ${rulerHTML}
-        </div>
-        <div class="fetus-real-size" style="height:${displayCm}cm;">
-          <img src="${fetusImg.src}" alt="胎儿">
-        </div>
+    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:260mm; padding:20mm;">
+      <img src="${fetusImg.src}" alt="胎儿" style="max-width:180mm; max-height:200mm; object-fit:contain; margin-bottom:8mm;">
+      <div style="font-size:28pt; font-weight:700; color:#FF6B9D; margin-bottom:4mm;">
+        ${length} cm
       </div>
-
-      <!-- Right: Data -->
-      <div class="a3-right">
-        <div class="a3-stats">
-          <div class="a3-stat"><div class="sv">${week}周</div><div class="sl">孕周</div></div>
-          <div class="a3-stat"><div class="sv">${length} cm</div><div class="sl">身长</div></div>
-          <div class="a3-stat"><div class="sv">${ws}</div><div class="sl">体重</div></div>
-          <div class="a3-stat"><div class="sv">${bpd} cm</div><div class="sl">双顶径 (BPD)</div></div>
-          ${hc ? `<div class="a3-stat"><div class="sv">${hc} cm</div><div class="sl">头围 (HC)</div></div>` : '<div class="a3-stat" style="opacity:0.3"><div class="sv">--</div><div class="sl">头围 (HC)</div></div>'}
-          ${ac ? `<div class="a3-stat"><div class="sv">${ac} cm</div><div class="sl">腹围 (AC)</div></div>` : '<div class="a3-stat" style="opacity:0.3"><div class="sv">--</div><div class="sl">腹围 (AC)</div></div>'}
-          ${fl ? `<div class="a3-stat"><div class="sv">${fl} cm</div><div class="sl">股骨长 (FL)</div></div>` : '<div class="a3-stat" style="opacity:0.3"><div class="sv">--</div><div class="sl">股骨长 (FL)</div></div>'}
-        </div>
-
-        <div class="a3-compare">
-          <div class="cf">${comp.emoji}</div>
-          <div class="ct">${comp.msg}</div>
-        </div>
-
-        <div class="a3-dev">
-          <h4>🌱 发育小贴士</h4>
-          ${getDevInfo(week)}
-        </div>
-
-        <!-- Horizontal ruler -->
-        <div class="a3-h-ruler">
-          <div class="h-ruler-label">📏 真实尺寸标尺（打印后为实际厘米）· 左侧竖尺 ${displayCm} cm</div>
-          <div class="h-ruler-bar" style="height:6mm">
-            ${hRulerHTML}
-          </div>
-        </div>
+      <div style="font-size:14pt; color:#888; margin-bottom:2mm;">
+        孕 ${week} 周 · ${weight >= 1000 ? (weight/1000).toFixed(1)+' kg' : weight+' g'}
       </div>
-    </div>
-
-    <div class="a3-footer">
-      🦞 宝宝真实大小 · 数据仅供参考 · 请以医生诊断为准 · 左侧标尺每个刻度 = 1cm（打印后真实尺寸）
+      <div style="font-size:12pt; color:#AAA;">
+        ${new Date().toLocaleDateString('zh-CN')}
+      </div>
     </div>`;
-
-  // Show A3 card (remove no-print so it's visible on screen)
-  document.getElementById('a3PrintCard').classList.remove('no-print');
 }
 
 function getDevInfo(week) {
@@ -602,14 +530,9 @@ async function downloadA3() {
         s.onload = res; s.onerror = () => rej(new Error('html2canvas加载失败')); document.head.appendChild(s);
       });
     }
-    // Temporarily reset transform for full resolution capture
-    const origTransform = preview.style.transform;
-    preview.style.transform = 'none';
     const canvas = await html2canvas(preview, {
       scale: 2, backgroundColor: '#FFFFFF', useCORS: true, logging: false,
-      width: preview.scrollWidth, height: preview.scrollHeight,
     });
-    preview.style.transform = origTransform;
 
     const link = document.createElement('a');
     link.download = `宝宝大小_${new Date().toISOString().slice(0,10)}.png`;
