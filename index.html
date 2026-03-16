@@ -394,11 +394,14 @@
   /* Print styles */
   @media print {
     body { background: white !important; padding: 0 !important; }
-    .header, .form-section, .result-section > *:not(.a4-card), .action-btns, .footer { display: none !important; }
+    .header, .form-section, .result-section > *:not(#a4PrintCard), .action-btns, .footer { display: none !important; }
     .result-section.show { display: block !important; }
-    .a4-card { box-shadow: none !important; padding: 0 !important; }
-    .a4-preview { border: none !important; padding: 20mm !important; }
+    #a4PrintCard { box-shadow: none !important; padding: 0 !important; }
+    .a4-preview { border: none !important; padding: 15mm !important; }
     .no-print { display: none !important; }
+    /* Ensure colors print */
+    .a4-title { -webkit-text-fill-color: var(--pink) !important; color: var(--pink) !important; }
+    .info-card .value { -webkit-text-fill-color: var(--pink) !important; color: var(--pink) !important; }
   }
 
   /* Responsive */
@@ -533,7 +536,7 @@
   </div>
 
   <!-- A4 Print Area -->
-  <div class="a4-card no-print">
+  <div class="a4-card" id="a4PrintCard">
     <h3>📄 A4 打印预览</h3>
     <div class="a4-preview" id="a4Preview"></div>
   </div>
