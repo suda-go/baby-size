@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🍼 宝宝真实大小 — B超尺寸可视化</title>
+<style>
+  :root {
+    --pink: #FF6B9D;
+    --pink-light: #FFF0F5;
+    --blue: #7EC8E3;
+    --blue-light: #E8F6FD;
+    --green: #95D5B2;
+    --orange: #FFB347;
+    --purple: #C9B1FF;
+    --bg: #FFF8FA;
+    --text: #3D3D3D;
+    --text-light: #888;
+    --card-bg: #FFFFFF;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    background: linear-gradient(135deg, var(--pink-light), var(--blue-light));
+  }
+  .header h1 {
+    font-size: 28px;
+    background: linear-gradient(135deg, var(--pink), #E876A0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .header p {
+    color: var(--text-light);
+    font-size: 15px;
+  }
+
+  /* Input Form */
+  .form-section {
+    max-width: 520px;
+    margin: 24px auto;
+    padding: 0 16px;
+  }
+  .form-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+  }
+  .form-card h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: var(--pink);
+  }
+
+  .input-group {
+    margin-bottom: 14px;
+  }
+  .input-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .input-group label span.unit {
+    color: var(--text-light);
+    font-weight: normal;
+    font-size: 12px;
+  }
+  .input-group label span.full-name {
+    color: var(--text-light);
+    font-weight: normal;
+    font-size: 12px;
+    margin-left: 4px;
+  }
+  .input-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #F0F0F0;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .input-group input:focus {
+    border-color: var(--pink);
+  }
+  .input-group input::placeholder {
+    color: #CCC;
+  }
+
+  .calc-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--pink), #E876A0);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .calc-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255,107,157,0.35);
+  }
+  .calc-btn:active {
+    transform: translateY(0);
+  }
+
+  /* Quick presets */
+  .presets {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .preset-btn {
+    padding: 6px 12px;
+    background: #F8F8F8;
+    border: 1px solid #EEE;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: all 0.2s;
+  }
+  .preset-btn:hover {
+    background: var(--pink-light);
+    color: var(--pink);
+    border-color: var(--pink);
+  }
+
+  /* Result Section */
+  .result-section {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: none;
+  }
+  .result-section.show {
+    display: block;
+  }
+
+  /* Info Cards */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .info-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 16px;
+    text-align: center;
+  }
+  .info-card .emoji {
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+  .info-card .value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--pink);
+  }
+  .info-card .label {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 2px;
+  }
+
+  /* Comparison Card */
+  .comparison-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .comparison-card .fruit-emoji {
+    font-size: 64px;
+    margin: 12px 0;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .comparison-card .message {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .comparison-card .sub-msg {
+    font-size: 14px;
+    color: var(--text-light);
+  }
+
+  /* Baby Illustration Card */
+  .baby-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .baby-card h3 {
+    font-size: 16px;
+    color: var(--pink);
+    margin-bottom: 12px;
+  }
+  .baby-canvas-wrap {
+    display: inline-block;
+    background: #FAFAFA;
+    border-radius: 12px;
+    padding: 16px;
+    position: relative;
+  }
+  #babyCanvas {
+    display: block;
+    margin: 0 auto;
+  }
+  .size-ruler {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  /* A4 Print Area */
+  .a4-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  .a4-card h3 {
+    font-size: 16px;
+    color: var(--pink);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .a4-preview {
+    background: white;
+    border: 2px dashed #E0E0E0;
+    border-radius: 8px;
+    padding: 24px;
+    min-height: 500px;
+    position: relative;
+  }
+  .a4-preview .a4-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--pink);
+    margin-bottom: 4px;
+  }
+  .a4-preview .a4-subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 16px;
+  }
+  .a4-preview .a4-baby-area {
+    text-align: center;
+    margin: 20px 0;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .a4-preview .a4-comparison {
+    text-align: center;
+    margin: 16px 0;
+    padding: 12px;
+    background: #FFF8FA;
+    border-radius: 12px;
+  }
+  .a4-preview .a4-comparison .fruit {
+    font-size: 48px;
+  }
+  .a4-preview .a4-comparison .text {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+  .a4-preview .a4-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 16px 0;
+    padding: 12px;
+    background: #F8F8F8;
+    border-radius: 12px;
+  }
+  .a4-preview .a4-stats .stat {
+    text-align: center;
+  }
+  .a4-preview .a4-stats .stat .val {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--pink);
+  }
+  .a4-preview .a4-stats .stat .lbl {
+    font-size: 11px;
+    color: var(--text-light);
+  }
+  .a4-preview .a4-dev-info {
+    margin-top: 16px;
+    padding: 14px;
+    background: #FFF5F8;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: #666;
+  }
+  .a4-preview .a4-dev-info h4 {
+    font-size: 14px;
+    color: var(--pink);
+    margin-bottom: 6px;
+  }
+  .a4-preview .a4-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 11px;
+    color: #CCC;
+  }
+  .a4-preview .a4-watermark {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 20px;
+    opacity: 0.3;
+  }
+
+  /* Action buttons */
+  .action-btns {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .action-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .action-btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn-download {
+    background: linear-gradient(135deg, var(--pink), #E876A0);
+    color: white;
+  }
+  .btn-print {
+    background: var(--card-bg);
+    color: var(--pink);
+    border: 2px solid var(--pink) !important;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    color: #CCC;
+  }
+
+  /* Print styles */
+  @media print {
+    body { background: white !important; padding: 0 !important; }
+    .header, .form-section, .result-section > *:not(.a4-card), .action-btns, .footer { display: none !important; }
+    .result-section.show { display: block !important; }
+    .a4-card { box-shadow: none !important; padding: 0 !important; }
+    .a4-preview { border: none !important; padding: 20mm !important; }
+    .no-print { display: none !important; }
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .header h1 { font-size: 22px; }
+    .info-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .a4-preview { padding: 16px; }
+  }
+
+  /* Dev info accordion */
+  .dev-section {
+    margin-top: 8px;
+  }
+  .dev-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--pink);
+    padding: 8px 0;
+  }
+  .dev-toggle .arrow {
+    transition: transform 0.3s;
+  }
+  .dev-toggle.open .arrow {
+    transform: rotate(180deg);
+  }
+  .dev-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s;
+  }
+  .dev-content.open {
+    max-height: 800px;
+  }
+  .dev-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 8px 0;
+  }
+  .dev-item {
+    background: #F8F8F8;
+    border-radius: 8px;
+    padding: 10px;
+  }
+  .dev-item .d-label {
+    font-size: 11px;
+    color: var(--text-light);
+  }
+  .dev-item .d-val {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🍼 宝宝真实大小</h1>
+  <p>输入 B 超数据，看看你的宝宝有多大啦</p>
+</div>
+
+<div class="form-section">
+  <div class="form-card">
+    <h2>📋 B 超数据输入</h2>
+
+    <div class="input-group">
+      <label>
+        <span>双顶径 (BPD) <span class="full-name">胎头最宽处</span></span>
+        <span class="unit">cm</span>
+      </label>
+      <input type="number" id="bpd" placeholder="例如：5.0" step="0.1" min="1" max="12">
+    </div>
+
+    <div class="input-group">
+      <label>
+        <span>头围 (HC) <span class="full-name">可选</span></span>
+        <span class="unit">cm</span>
+      </label>
+      <input type="number" id="hc" placeholder="例如：18.0" step="0.1" min="5" max="40">
+    </div>
+
+    <div class="input-group">
+      <label>
+        <span>腹围 (AC) <span class="full-name">可选</span></span>
+        <span class="unit">cm</span>
+      </label>
+      <input type="number" id="ac" placeholder="例如：15.0" step="0.1" min="5" max="40">
+    </div>
+
+    <div class="input-group">
+      <label>
+        <span>股骨长 (FL) <span class="full-name">大腿骨长度</span></span>
+        <span class="unit">cm</span>
+      </label>
+      <input type="number" id="fl" placeholder="例如：3.5" step="0.1" min="0.5" max="10">
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">🦞 看看宝宝有多大</button>
+
+    <div class="presets">
+      <span style="font-size:12px;color:#BBB;line-height:28px;">快速填写：</span>
+      <button class="preset-btn" onclick="fillPreset(12)">12周</button>
+      <button class="preset-btn" onclick="fillPreset(16)">16周</button>
+      <button class="preset-btn" onclick="fillPreset(20)">20周</button>
+      <button class="preset-btn" onclick="fillPreset(24)">24周</button>
+      <button class="preset-btn" onclick="fillPreset(28)">28周</button>
+      <button class="preset-btn" onclick="fillPreset(32)">32周</button>
+      <button class="preset-btn" onclick="fillPreset(36)">36周</button>
+      <button class="preset-btn" onclick="fillPreset(40)">40周</button>
+    </div>
+  </div>
+</div>
+
+<div class="result-section" id="resultSection">
+  <!-- Info Grid -->
+  <div class="info-grid" id="infoGrid"></div>
+
+  <!-- Comparison -->
+  <div class="comparison-card" id="comparisonCard"></div>
+
+  <!-- Baby Illustration -->
+  <div class="baby-card">
+    <h3>🎨 宝宝示意图</h3>
+    <div class="baby-canvas-wrap">
+      <canvas id="babyCanvas" width="320" height="320"></canvas>
+    </div>
+    <div class="size-ruler" id="sizeRuler"></div>
+  </div>
+
+  <!-- A4 Print Area -->
+  <div class="a4-card no-print">
+    <h3>📄 A4 打印预览</h3>
+    <div class="a4-preview" id="a4Preview"></div>
+  </div>
+
+  <!-- Action buttons -->
+  <div class="form-section">
+    <div class="action-btns no-print">
+      <button class="action-btn btn-download" onclick="downloadA4()">⬇️ 下载图片</button>
+      <button class="action-btn btn-print" onclick="window.print()">🖨️ 打印 A4</button>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  🦞 宝宝真实大小 · 数据仅供参考 · 请以医生诊断为准
+</div>
+
+<script>
+// ====== B超参数对照表 (BPD → 孕周/身长/体重) ======
+const GROWTH_TABLE = [
+  { week: 12, bpd: 2.0, hc: 7.0,  ac: 5.6,  fl: 0.8,  length: 9,    weight: 14 },
+  { week: 13, bpd: 2.4, hc: 8.4,  ac: 6.7,  fl: 1.0,  length: 10,   weight: 23 },
+  { week: 14, bpd: 2.8, hc: 10.0, ac: 8.0,  fl: 1.3,  length: 13,   weight: 43 },
+  { week: 15, bpd: 3.2, hc: 11.5, ac: 9.3,  fl: 1.7,  length: 14,   weight: 70 },
+  { week: 16, bpd: 3.5, hc: 12.8, ac: 10.5, fl: 2.0,  length: 16,   weight: 110 },
+  { week: 17, bpd: 3.8, hc: 13.8, ac: 11.5, fl: 2.3,  length: 18,   weight: 150 },
+  { week: 18, bpd: 4.2, hc: 15.0, ac: 12.8, fl: 2.6,  length: 20,   weight: 200 },
+  { week: 19, bpd: 4.5, hc: 16.2, ac: 13.8, fl: 2.9,  length: 22,   weight: 240 },
+  { week: 20, bpd: 4.9, hc: 17.5, ac: 15.0, fl: 3.3,  length: 25,   weight: 300 },
+  { week: 21, bpd: 5.2, hc: 18.5, ac: 16.0, fl: 3.6,  length: 27,   weight: 380 },
+  { week: 22, bpd: 5.5, hc: 19.5, ac: 17.0, fl: 3.9,  length: 28,   weight: 460 },
+  { week: 23, bpd: 5.8, hc: 20.5, ac: 18.0, fl: 4.2,  length: 29,   weight: 540 },
+  { week: 24, bpd: 6.0, hc: 21.5, ac: 19.0, fl: 4.5,  length: 30,   weight: 600 },
+  { week: 25, bpd: 6.3, hc: 22.5, ac: 20.0, fl: 4.7,  length: 32,   weight: 700 },
+  { week: 26, bpd: 6.6, hc: 23.3, ac: 21.0, fl: 4.9,  length: 34,   weight: 800 },
+  { week: 27, bpd: 6.8, hc: 24.0, ac: 21.8, fl: 5.2,  length: 35,   weight: 950 },
+  { week: 28, bpd: 7.1, hc: 25.0, ac: 22.8, fl: 5.4,  length: 37,   weight: 1100 },
+  { week: 29, bpd: 7.3, hc: 25.8, ac: 23.6, fl: 5.6,  length: 38,   weight: 1250 },
+  { week: 30, bpd: 7.6, hc: 26.6, ac: 24.5, fl: 5.8,  length: 39,   weight: 1400 },
+  { week: 31, bpd: 7.8, hc: 27.3, ac: 25.3, fl: 6.0,  length: 40,   weight: 1600 },
+  { week: 32, bpd: 8.0, hc: 28.0, ac: 26.0, fl: 6.2,  length: 42,   weight: 1800 },
+  { week: 33, bpd: 8.2, hc: 28.7, ac: 26.8, fl: 6.4,  length: 43,   weight: 2000 },
+  { week: 34, bpd: 8.5, hc: 29.5, ac: 27.5, fl: 6.6,  length: 44,   weight: 2250 },
+  { week: 35, bpd: 8.7, hc: 30.2, ac: 28.2, fl: 6.7,  length: 45,   weight: 2500 },
+  { week: 36, bpd: 8.8, hc: 30.7, ac: 29.0, fl: 6.9,  length: 47,   weight: 2700 },
+  { week: 37, bpd: 9.0, hc: 31.2, ac: 29.8, fl: 7.1,  length: 48,   weight: 2950 },
+  { week: 38, bpd: 9.2, hc: 31.7, ac: 30.5, fl: 7.2,  length: 49,   weight: 3100 },
+  { week: 39, bpd: 9.4, hc: 32.2, ac: 31.2, fl: 7.3,  length: 50,   weight: 3300 },
+  { week: 40, bpd: 9.5, hc: 32.8, ac: 32.0, fl: 7.5,  length: 51,   weight: 3400 },
+];
+
+// ====== 参照物数据库 ======
+const COMPARISONS = [
+  { maxLen: 2,   emoji: '🫘', name: '一颗小豆子', msg: '宝宝还是一颗小豆子呢～' },
+  { maxLen: 3,   emoji: '🫐', name: '一颗蓝莓', msg: '你的宝宝像一颗蓝莓那么大！' },
+  { maxLen: 5,   emoji: '🍓', name: '一颗草莓', msg: '你的宝宝像一颗草莓！' },
+  { maxLen: 7,   emoji: '🍑', name: '一颗小桃子', msg: '你的宝宝像一颗小桃子～' },
+  { maxLen: 10,  emoji: '🥝', name: '一个猕猴桃', msg: '你的宝宝像一个猕猴桃！' },
+  { maxLen: 14,  emoji: '🍋', name: '一个柠檬', msg: '你的宝宝像一个柠檬！' },
+  { maxLen: 18,  emoji: '🥑', name: '一个牛油果', msg: '你的宝宝像一个牛油果！' },
+  { maxLen: 22,  emoji: '🥭', name: '一个小芒果', msg: '你的宝宝像一个小芒果！' },
+  { maxLen: 26,  emoji: '🌽', name: '一根玉米', msg: '你的宝宝像一根玉米那么长！' },
+  { maxLen: 30,  emoji: '🍌', name: '一根大香蕉', msg: '你的宝宝像一根大香蕉！' },
+  { maxLen: 35,  emoji: '🍆', name: '一根茄子', msg: '你的宝宝像一根茄子！' },
+  { maxLen: 39,  emoji: '🍍', name: '一个菠萝', msg: '你的宝宝像一个菠萝！' },
+  { maxLen: 43,  emoji: '🍈', name: '一个哈密瓜', msg: '你的宝宝像一个哈密瓜那么大！' },
+  { maxLen: 47,  emoji: '🥥', name: '一个椰子', msg: '你的宝宝像一个椰子！' },
+  { maxLen: 51,  emoji: '🍉', name: '一个小西瓜', msg: '你的宝宝快像一个小西瓜啦！' },
+  { maxLen: 99,  emoji: '🎃', name: '一个大南瓜', msg: '你的宝宝已经很大啦！' },
+];
+
+// ====== 填充预设 ======
+function fillPreset(week) {
+  const data = GROWTH_TABLE.find(d => d.week === week);
+  if (!data) return;
+  document.getElementById('bpd').value = data.bpd;
+  document.getElementById('hc').value = data.hc;
+  document.getElementById('ac').value = data.ac;
+  document.getElementById('fl').value = data.fl;
+  calculate();
+}
+
+// ====== 核心计算 ======
+function calculate() {
+  const bpd = parseFloat(document.getElementById('bpd').value);
+  const hc = parseFloat(document.getElementById('hc').value);
+  const ac = parseFloat(document.getElementById('ac').value);
+  const fl = parseFloat(document.getElementById('fl').value);
+
+  if (!bpd || bpd <= 0) {
+    alert('请输入双顶径（BPD）！');
+    return;
+  }
+
+  // 估算孕周
+  let weekData = estimateWeek(bpd, fl, hc, ac);
+  let { week, length, weight, estimatedWeek } = weekData;
+
+  // 参照物
+  let comp = getComparison(length);
+
+  // 显示结果
+  showResults(week, length, weight, comp, bpd, hc, ac, fl);
+}
+
+function estimateWeek(bpd, fl, hc, ac) {
+  // 用 BPD 查找最接近的孕周
+  let bestDiff = Infinity, bestEntry = GROWTH_TABLE[0];
+
+  for (let entry of GROWTH_TABLE) {
+    let diff = Math.abs(entry.bpd - bpd);
+    if (diff < bestDiff) {
+      bestDiff = diff;
+      bestEntry = entry;
+    }
+  }
+
+  // 精确孕周估算（线性插值）
+  let estimatedWeek = bestEntry.week;
+  let idx = GROWTH_TABLE.indexOf(bestEntry);
+  if (idx < GROWTH_TABLE.length - 1 && idx > 0) {
+    let prev = GROWTH_TABLE[idx - 1];
+    let next = GROWTH_TABLE[idx + 1];
+    if (bpd > bestEntry.bpd && next) {
+      let ratio = (bpd - bestEntry.bpd) / (next.bpd - bestEntry.bpd);
+      estimatedWeek = bestEntry.week + ratio;
+    } else if (bpd < bestEntry.bpd && prev) {
+      let ratio = (bestEntry.bpd - bpd) / (bestEntry.bpd - prev.bpd);
+      estimatedWeek = bestEntry.week - ratio;
+    }
+  }
+
+  // 估算身长（基于孕周）
+  let length = bestEntry.length;
+  let weight = bestEntry.weight;
+
+  // 如果有FL，用 FL 辅助修正身长（FL * 7 ≈ 身长）
+  if (fl && fl > 0) {
+    let flLength = fl * 7;
+    length = Math.round((length + flLength) / 2);
+  }
+
+  // 体重估算 Hadlock 公式简化版
+  if (bpd && ac && fl) {
+    let logWeight = 1.326 + 0.0107 * hc + 0.0438 * ac + 0.158 * fl - 0.00326 * ac * fl;
+    if (hc && hc > 0) {
+      weight = Math.round(Math.pow(10, logWeight));
+    } else {
+      // 没有HC，简化公式
+      weight = Math.round(Math.pow(10, 1.113 + 0.058 * bpd + 0.043 * ac - 0.0002 * ac * fl));
+    }
+  }
+
+  return { week: bestEntry.week, estimatedWeek, length, weight };
+}
+
+function getComparison(length) {
+  for (let comp of COMPARISONS) {
+    if (length <= comp.maxLen) return comp;
+  }
+  return COMPARISONS[COMPARISONS.length - 1];
+}
+
+// ====== 显示结果 ======
+function showResults(week, length, weight, comp, bpd, hc, ac, fl) {
+  const section = document.getElementById('resultSection');
+  section.classList.add('show');
+
+  // 信息卡片
+  const infoGrid = document.getElementById('infoGrid');
+  const gestWeek = Math.round(week);
+  infoGrid.innerHTML = `
+    <div class="info-card">
+      <div class="emoji">📅</div>
+      <div class="value">${gestWeek}周</div>
+      <div class="label">估计孕周</div>
+    </div>
+    <div class="info-card">
+      <div class="emoji">📏</div>
+      <div class="value">${length} cm</div>
+      <div class="label">估计身长</div>
+    </div>
+    <div class="info-card">
+      <div class="emoji">⚖️</div>
+      <div class="value">${weight >= 1000 ? (weight/1000).toFixed(1) + ' kg' : weight + ' g'}</div>
+      <div class="label">估计体重</div>
+    </div>
+    <div class="info-card">
+      <div class="emoji">${comp.emoji}</div>
+      <div class="value">${comp.name}</div>
+      <div class="label">真实大小参照</div>
+    </div>
+  `;
+
+  // 对比卡片
+  const compCard = document.getElementById('comparisonCard');
+  compCard.innerHTML = `
+    <div class="fruit-emoji">${comp.emoji}</div>
+    <div class="message">${comp.msg}</div>
+    <div class="sub-msg">身长约 ${length} cm，体重约 ${weight >= 1000 ? (weight/1000).toFixed(1) + ' 千克' : weight + ' 克'}</div>
+  `;
+
+  // 画宝宝示意图
+  drawBaby(length, week);
+
+  // 尺寸标尺
+  document.getElementById('sizeRuler').textContent = `实际长度约 ${length} cm — ${comp.name}`;
+
+  // 生成 A4 预览
+  generateA4(week, length, weight, comp, bpd, hc, ac, fl);
+
+  // 滚动到结果
+  section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ====== Canvas 绘制可爱胎儿 ======
+function drawBaby(length, week) {
+  const canvas = document.getElementById('babyCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // 缩放比例：让宝宝占画布的比例随实际大小变化
+  const scale = Math.min(1.5, 0.3 + (length / 51) * 1.2);
+  const centerX = W / 2;
+  const centerY = H / 2;
+
+  ctx.save();
+  ctx.translate(centerX, centerY);
+  ctx.scale(scale, scale);
+
+  // 胎儿颜色
+  const skinColor = '#FFB6A3';
+  const cheekColor = '#FF8E8E';
+  const outlineColor = '#E8847A';
+
+  // 根据孕周决定绘制风格
+  if (week < 16) {
+    // 早期：简单椭圆小人
+    drawEarlyBaby(ctx, skinColor, outlineColor, cheekColor);
+  } else if (week < 24) {
+    // 中期：有轮廓的小人
+    drawMidBaby(ctx, skinColor, outlineColor, cheekColor);
+  } else {
+    // 晚期：更完整的小人
+    drawLateBaby(ctx, skinColor, outlineColor, cheekColor);
+  }
+
+  ctx.restore();
+}
+
+function drawEarlyBaby(ctx, skin, outline, cheek) {
+  // 身体（蜷缩的椭圆）
+  ctx.beginPath();
+  ctx.ellipse(0, 10, 28, 35, 0, 0, Math.PI * 2);
+  ctx.fillStyle = skin;
+  ctx.fill();
+  ctx.strokeStyle = outline;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // 头
+  ctx.beginPath();
+  ctx.ellipse(0, -25, 22, 20, 0, 0, Math.PI * 2);
+  ctx.fillStyle = skin;
+  ctx.fill();
+  ctx.stroke();
+
+  // 眼睛（闭着的）
+  ctx.beginPath();
+  ctx.arc(-7, -27, 2.5, 0, Math.PI, false);
+  ctx.strokeStyle = outline;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(7, -27, 2.5, 0, Math.PI, false);
+  ctx.stroke();
+
+  // 嘴巴（微笑）
+  ctx.beginPath();
+  ctx.arc(0, -21, 5, 0.1, Math.PI - 0.1, false);
+  ctx.strokeStyle = outline;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // 腮红
+  ctx.fillStyle = cheek;
+  ctx.globalAlpha = 0.4;
+  ctx.beginPath();
+  ctx.ellipse(-14, -21, 5, 3, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(14, -21, 5, 3, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // 手（蜷缩的小圆点）
+  ctx.beginPath();
+  ctx.ellipse(-20, 15, 6, 5, -0.3, 0, Math.PI * 2);
+  ctx.fillStyle = skin;
+  ctx.fill();
+  ctx.strokeStyle = outline;
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.ellipse(20, 15, 6, 5, 0.3, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+
+  // 小尾巴（蜷缩的腿）
+  ctx.beginPath();
+  ctx.ellipse(0, 40, 15, 10, 0, 0, Math.PI);
+  ctx.fillStyle = skin;
+  ctx.fill();
+  ctx.strokeStyle = outline;
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+function drawMidBaby(ctx, skin, outline, cheek) {
+  // 背部弧线（蜷缩姿势）
+  ctx.beginPath();
+  ctx.moveTo(-30, -10);
+  ctx.quadraticCurveTo(-35, 30, -15, 50);
+  ctx.quadraticCurveTo(0, 60, 15, 50);
+  ctx.quadraticCurveTo(35, 30, 30, -10);
+  ctx.quadraticCurveTo(25, -35, 0, -40);
+  ctx.quadraticCurveTo(-25, -35, -30, -10);
+  ctx.fillStyle = skin;
+  ctx.fill();
+  ctx.strokeStyle = outline;
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  // 头（较大的比例）
+  ctx.beginPath();
+  ctx.ellipse(0, -35, 28, 25, 0, 0, Math.PI * 2);
+  ctx.fillStyle = skin;
+  ctx.fill();
+  ctx.stroke();
+
+  // 胳膊
+  ctx.beginPath();
+  ctx.moveTo(-25, -5);
+  ctx.quadraticCurveTo(-40, 5, -35, 20);
+  ctx.quadraticCurveTo(-32, 28, -25, 25);
+  ctx.strokeStyle = outline;
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(25, -5);
+  ctx.quadraticCurveTo(40, 5, 35, 20);
+  ctx.quadraticCurveTo(32, 28, 25, 25);
+  ctx.stroke();
+
+  // 腿蜷缩
+  ctx.beginPath();
+  ctx.moveTo(-12, 45);
+  ctx.quadraticCurveTo(-20, 58, -10, 62);
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(12, 45);
+  ctx.quadraticCurveTo(20, 58, 10, 62);
+  ctx.stroke();
+
+  // 眼睛（闭着）
+  ctx.beginPath();
+  ctx.arc(-9, -37, 3, 0, Math.PI, false);
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(9, -37, 3, 0, Math.PI, false);
+  ctx.stroke();
+
+  // 微笑
+  ctx.beginPath();
+  ctx.arc(0, -29, 6, 0.15, Math.PI - 0.15, false);
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // 腮红
+  ctx.fillStyle = cheek;
+  ctx.globalAlpha = 0.35;
+  ctx.beginPath();
+  ctx.ellipse(-18, -31, 5, 3.5, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(18, -31, 5, 3.5, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // 脐带
+  ctx.beginPath();
+  ctx.moveTo(5, 30);
+  ctx.quadraticCurveTo(20, 35, 18, 20);
+  ctx.strokeStyle = '#E0A899';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([3, 3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function drawLateBaby(ctx, skin, outline, cheek) {
+  // 蜷缩的姿势，更完整的细节
+  // 身体
+  ctx.beginPath();
+  ctx.moveTo(-35, -5);
+  ctx.quadraticCurveTo(-42, 35, -20, 55);
+  ctx.quadraticCurveTo(0, 68, 20, 55);
+  ctx.quadraticCurveTo(42, 35, 35, -5);
+  ctx.quadraticCurveTo(30, -35, 0, -42);
+  ctx.quadraticCurveTo(-30, -35, -35, -5);
+  ctx.fillStyle = skin;
+  ctx.fill();
+  ctx.strokeStyle = outline;
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  // 头
+  ctx.beginPath();
+  ctx.ellipse(0, -38, 32, 28, 0, 0, Math.PI * 2);
+  ctx.fillStyle = skin;
+  ctx.fill();
+  ctx.stroke();
+
+  // 头发（几根小绒毛）
+  ctx.strokeStyle = '#E8847A';
+  ctx.lineWidth = 1.5;
+  for (let i = -2; i <= 2; i++) {
+    ctx.beginPath();
+    ctx.moveTo(i * 5, -63);
+    ctx.quadraticCurveTo(i * 6, -68, i * 4, -66);
+    ctx.stroke();
+  }
+
+  // 胳膊（更清晰）
+  ctx.beginPath();
+  ctx.moveTo(-30, 0);
+  ctx.quadraticCurveTo(-48, 10, -42, 28);
+  ctx.quadraticCurveTo(-38, 38, -30, 32);
+  ctx.strokeStyle = outline;
+  ctx.lineWidth = 3.5;
+  ctx.stroke();
+
+  // 手指
+  ctx.beginPath();
+  ctx.moveTo(-42, 28);
+  ctx.quadraticCurveTo(-46, 32, -43, 35);
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(30, 0);
+  ctx.quadraticCurveTo(48, 10, 42, 28);
+  ctx.quadraticCurveTo(38, 38, 30, 32);
+  ctx.lineWidth = 3.5;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(42, 28);
+  ctx.quadraticCurveTo(46, 32, 43, 35);
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // 腿
+  ctx.beginPath();
+  ctx.moveTo(-15, 50);
+  ctx.quadraticCurveTo(-25, 65, -18, 70);
+  ctx.strokeStyle = outline;
+  ctx.lineWidth = 3.5;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(15, 50);
+  ctx.quadraticCurveTo(25, 65, 18, 70);
+  ctx.stroke();
+
+  // 脚趾
+  ctx.beginPath();
+  ctx.moveTo(-18, 70);
+  ctx.quadraticCurveTo(-22, 74, -16, 75);
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(18, 70);
+  ctx.quadraticCurveTo(22, 74, 16, 75);
+  ctx.stroke();
+
+  // 眼睛
+  ctx.beginPath();
+  ctx.arc(-10, -40, 3.5, 0, Math.PI, false);
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(10, -40, 3.5, 0, Math.PI, false);
+  ctx.stroke();
+
+  // 微笑
+  ctx.beginPath();
+  ctx.arc(0, -32, 7, 0.15, Math.PI - 0.15, false);
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // 腮红
+  ctx.fillStyle = cheek;
+  ctx.globalAlpha = 0.3;
+  ctx.beginPath();
+  ctx.ellipse(-20, -33, 6, 4, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.ellipse(20, -33, 6, 4, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.globalAlpha = 1;
+
+  // 脐带
+  ctx.beginPath();
+  ctx.moveTo(8, 35);
+  ctx.quadraticCurveTo(28, 42, 22, 22);
+  ctx.strokeStyle = '#E0A899';
+  ctx.lineWidth = 2.5;
+  ctx.setLineDash([4, 3]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+// ====== A4 预览生成 ======
+function generateA4(week, length, weight, comp, bpd, hc, ac, fl) {
+  const gestWeek = Math.round(week);
+  const preview = document.getElementById('a4Preview');
+
+  // 发育信息
+  const devInfo = getDevInfo(gestWeek);
+
+  preview.innerHTML = `
+    <div class="a4-title">🍼 你的宝宝 ${gestWeek} 周啦！</div>
+    <div class="a4-subtitle">宝宝真实大小纪念卡 · 留住这一刻</div>
+
+    <div class="a4-baby-area">
+      <canvas id="a4BabyCanvas" width="280" height="280"></canvas>
+    </div>
+
+    <div class="a4-comparison">
+      <div class="fruit">${comp.emoji}</div>
+      <div class="text">${comp.msg}</div>
+    </div>
+
+    <div class="a4-stats">
+      <div class="stat">
+        <div class="val">${gestWeek}周</div>
+        <div class="lbl">孕周</div>
+      </div>
+      <div class="stat">
+        <div class="val">${length} cm</div>
+        <div class="lbl">身长</div>
+      </div>
+      <div class="stat">
+        <div class="val">${weight >= 1000 ? (weight/1000).toFixed(1) + ' kg' : weight + ' g'}</div>
+        <div class="lbl">体重</div>
+      </div>
+      <div class="stat">
+        <div class="val">${bpd} cm</div>
+        <div class="lbl">双顶径</div>
+      </div>
+    </div>
+
+    <div class="a4-dev-info">
+      <h4>🌱 发育小贴士</h4>
+      ${devInfo}
+    </div>
+
+    <div class="a4-footer">
+      🦞 宝宝真实大小 · 数据仅供参考 · 请以医生诊断为准<br>
+      生成时间：${new Date().toLocaleDateString('zh-CN')}
+    </div>
+    <div class="a4-watermark">🦞</div>
+  `;
+
+  // 画A4版本的宝宝
+  const a4Canvas = document.getElementById('a4BabyCanvas');
+  const a4Ctx = a4Canvas.getContext('2d');
+  a4Ctx.drawImage(document.getElementById('babyCanvas'), 0, 0, 280, 280);
+}
+
+function getDevInfo(week) {
+  const infos = {
+    12: '宝宝开始有反射动作了！手指和脚趾已经分开，可以握拳。大脑发育非常迅速。',
+    13: '宝宝开始长出细小的指纹，独一无二的身份标识正在形成。',
+    14: '宝宝可以做鬼脸啦！皱眉、微笑的面部表情开始出现。',
+    15: '宝宝能感受到光线了，虽然眼睛还闭着，但对光有反应。',
+    16: '宝宝开始能听到声音了！可以开始给ta讲故事、放音乐。',
+    17: '脂肪开始形成，宝宝不再透明了。骨骼也在变硬。',
+    18: '如果是个女孩，子宫和输卵管已经形成。',
+    19: '感觉器官快速发育，味觉、嗅觉、触觉都在建立。',
+    20: '胎动越来越明显了！宝宝开始吞咽羊水。',
+    21: '宝宝的眉毛和眼皮已经完全形成了，看起来像个小人。',
+    22: '眼睛已经形成，但虹膜还没有颜色。',
+    23: '听力更加敏锐，能辨认妈妈的声音了。',
+    24: '宝宝有了睡眠周期，醒着和睡觉的时间交替。',
+    25: '大脑对触觉有反应了，如果你摸肚子，ta可能会回应！',
+    26: '眼睛第一次睁开！虽然还看不清东西。',
+    27: '宝宝开始有规律的呼吸动作（练习中）。',
+    28: '进入孕晚期！宝宝可以做梦了（REM睡眠出现）。',
+    29: '骨骼完全发育，但仍然很柔软，方便通过产道。',
+    30: '宝宝头发开始长出来，可能已经有了胎毛。',
+    31: '所有感官都已运作，宝宝能看到、听到、尝到。',
+    32: '脚趾甲和手指甲完全长好了。',
+    33: '免疫系统开始建立，从妈妈那里获取抗体。',
+    34: '肺部发育接近成熟，如果现在出生存活率很高。',
+    35: '肾脏功能完善，肝脏也能处理一些废物了。',
+    36: '宝宝越来越重，子宫里的空间变小了。',
+    37: '足月！宝宝已经准备好来到这个世界。',
+    38: '继续增重中，脂肪储备帮助出生后保持体温。',
+    39: '器官全部成熟，宝宝随时可能发动哦！',
+    40: '预产期到了！宝宝已经准备好和爸爸妈妈见面了 🎉',
+  };
+  return infos[week] || infos[40];
+}
+
+// ====== 下载 A4 ======
+async function downloadA4() {
+  const preview = document.getElementById('a4Preview');
+  const btn = document.querySelector('.btn-download');
+  btn.textContent = '⏳ 生成中...';
+  btn.disabled = true;
+
+  try {
+    // 动态加载 html2canvas
+    if (!window.html2canvas) {
+      await loadScript('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js');
+    }
+
+    const canvas = await html2canvas(preview, {
+      scale: 2,
+      backgroundColor: '#FFFFFF',
+      useCORS: true,
+      logging: false,
+    });
+
+    const link = document.createElement('a');
+    link.download = `宝宝大小_${new Date().toISOString().slice(0,10)}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  } catch (e) {
+    console.error(e);
+    alert('下载失败，请截图保存');
+  }
+
+  btn.textContent = '⬇️ 下载图片';
+  btn.disabled = false;
+}
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+</script>
+
+</body>
+</html>
