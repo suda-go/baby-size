@@ -9,7 +9,6 @@
     --pink: #FF6B9D;
     --pink-light: #FFF0F5;
     --blue: #7EC8E3;
-    --blue-light: #E8F6FD;
     --bg: #FFF8FA;
     --text: #3D3D3D;
     --text-light: #888;
@@ -17,9 +16,7 @@
     --shadow: 0 4px 20px rgba(0,0,0,0.08);
     --radius: 16px;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif;
     background: var(--bg);
@@ -31,7 +28,7 @@
   .header {
     text-align: center;
     padding: 40px 20px 20px;
-    background: linear-gradient(135deg, var(--pink-light), var(--blue-light));
+    background: linear-gradient(135deg, var(--pink-light), #E8F6FD);
   }
   .header h1 {
     font-size: 28px;
@@ -42,321 +39,242 @@
   }
   .header p { color: var(--text-light); font-size: 15px; }
 
-  .form-section {
-    max-width: 520px;
-    margin: 24px auto;
-    padding: 0 16px;
-  }
-  .form-card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 24px;
-  }
+  .form-section { max-width: 520px; margin: 24px auto; padding: 0 16px; }
+  .form-card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; }
   .form-card h2 { font-size: 18px; margin-bottom: 16px; color: var(--pink); }
-
   .input-group { margin-bottom: 14px; }
   .input-group label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 6px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 14px; font-weight: 500; margin-bottom: 6px;
   }
-  .input-group label .unit { color: var(--text-light); font-weight: normal; font-size: 12px; }
-  .input-group label .full-name { color: var(--text-light); font-weight: normal; font-size: 12px; margin-left: 4px; }
+  .input-group label .unit, .input-group label .full-name { color: var(--text-light); font-size: 12px; font-weight: normal; }
   .input-group input {
-    width: 100%;
-    padding: 10px 14px;
-    border: 2px solid #F0F0F0;
-    border-radius: 10px;
-    font-size: 16px;
-    outline: none;
-    transition: border-color 0.2s;
+    width: 100%; padding: 10px 14px; border: 2px solid #F0F0F0;
+    border-radius: 10px; font-size: 16px; outline: none; transition: border-color 0.2s;
   }
   .input-group input:focus { border-color: var(--pink); }
   .input-group input::placeholder { color: #CCC; }
-
   .calc-btn {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, var(--pink), #E876A0);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 17px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: transform 0.15s, box-shadow 0.15s;
+    width: 100%; padding: 14px; background: linear-gradient(135deg, var(--pink), #E876A0);
+    color: white; border: none; border-radius: 12px; font-size: 17px;
+    font-weight: 600; cursor: pointer; margin-top: 8px; transition: transform 0.15s;
   }
   .calc-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,107,157,0.35); }
-
   .presets { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; align-items: center; }
   .preset-btn {
-    padding: 6px 12px;
-    background: #F8F8F8;
-    border: 1px solid #EEE;
-    border-radius: 20px;
-    font-size: 12px;
-    cursor: pointer;
-    color: var(--text-light);
-    transition: all 0.2s;
+    padding: 6px 12px; background: #F8F8F8; border: 1px solid #EEE;
+    border-radius: 20px; font-size: 12px; cursor: pointer; color: var(--text-light); transition: all 0.2s;
   }
   .preset-btn:hover { background: var(--pink-light); color: var(--pink); border-color: var(--pink); }
 
   .result-section { max-width: 520px; margin: 0 auto; padding: 0 16px; display: none; }
   .result-section.show { display: block; }
-
   .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-  .info-card {
-    background: var(--card-bg);
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    padding: 16px;
-    text-align: center;
-  }
+  .info-card { background: var(--card-bg); border-radius: 12px; box-shadow: var(--shadow); padding: 16px; text-align: center; }
   .info-card .emoji { font-size: 28px; margin-bottom: 6px; }
   .info-card .value { font-size: 20px; font-weight: 700; color: var(--pink); }
   .info-card .label { font-size: 12px; color: var(--text-light); margin-top: 2px; }
-
-  .comparison-card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 24px;
-    text-align: center;
-    margin-bottom: 16px;
-  }
+  .comparison-card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; text-align: center; margin-bottom: 16px; }
   .comparison-card .fruit-emoji { font-size: 64px; margin: 12px 0; animation: bounce 2s infinite; }
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
   .comparison-card .message { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
   .comparison-card .sub-msg { font-size: 14px; color: var(--text-light); }
 
-  /* Fetus Image Card */
-  .fetus-card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 16px;
-  }
+  .fetus-card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; text-align: center; margin-bottom: 16px; }
   .fetus-card h3 { font-size: 16px; color: var(--pink); margin-bottom: 12px; }
-  .fetus-img-wrap {
-    display: inline-block;
-    background: #FAFAFA;
-    border-radius: 12px;
-    padding: 12px;
-    position: relative;
-  }
-  .fetus-img-wrap img {
-    max-width: 280px;
-    max-height: 280px;
-    border-radius: 8px;
-    display: block;
-  }
+  .fetus-img-wrap { display: inline-block; background: #FAFAFA; border-radius: 12px; padding: 12px; }
+  .fetus-img-wrap img { max-width: 280px; max-height: 280px; border-radius: 8px; display: block; }
+  .ruler-info { margin-top: 10px; font-size: 13px; color: var(--text-light); }
 
-  /* Real-size ruler on screen */
-  .ruler-info {
-    margin-top: 10px;
-    font-size: 13px;
-    color: var(--text-light);
-  }
+  /* ====== A3 Print Card ====== */
+  .a3-card { background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; margin-bottom: 16px; }
+  .a3-card h3 { font-size: 16px; color: var(--pink); margin-bottom: 12px; text-align: center; }
 
-  /* A4 Print Card */
-  .a4-card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 20px;
-    margin-bottom: 16px;
-  }
-  .a4-card h3 { font-size: 16px; color: var(--pink); margin-bottom: 12px; text-align: center; }
-
-  .a4-preview {
+  .a3-preview {
     background: white;
     border: 2px dashed #E0E0E0;
     border-radius: 8px;
-    padding: 20mm;
-    min-height: 260mm;
+    /* A3 landscape: 420mm wide x 297mm tall */
+    width: 420mm;
+    min-height: 297mm;
+    padding: 12mm 15mm;
     position: relative;
-    font-family: 'PingFang SC', 'Noto Sans SC', sans-serif;
+    overflow: hidden;
+    transform-origin: top left;
+    /* Scale down on screen to fit */
+    transform: scale(0.45);
+    margin-bottom: -140mm; /* compensate for scaled space */
   }
-  .a4-header {
+
+  .a3-title {
     text-align: center;
-    border-bottom: 2px solid var(--pink);
-    padding-bottom: 12px;
-    margin-bottom: 20px;
-  }
-  .a4-header h2 {
     font-size: 22px;
+    font-weight: 700;
     color: var(--pink);
-    -webkit-text-fill-color: var(--pink);
+    margin-bottom: 4px;
   }
-  .a4-header .a4-sub {
-    font-size: 12px;
-    color: var(--text-light);
-    margin-top: 4px;
-  }
+  .a3-subtitle { text-align: center; font-size: 11px; color: var(--text-light); margin-bottom: 10px; }
 
-  .a4-body {
+  .a3-main {
     display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: 10mm;
+    align-items: flex-start;
   }
 
-  /* Left: fetus image with real-size ruler */
-  .a4-left {
+  /* Left: Ruler + Fetus image — uses REAL cm units */
+  .a3-left {
     flex: 0 0 auto;
-    position: relative;
-  }
-  .a4-fetus-img {
-    max-width: 200px;
-    max-height: 200px;
-    border-radius: 8px;
+    display: flex;
+    align-items: flex-end;
+    gap: 3mm;
   }
 
-  /* Real ruler beside image */
-  .a4-ruler {
-    position: absolute;
-    top: 0;
-    left: -28px;
-    width: 22px;
-    height: 200px;
-    border-right: 1.5px solid #666;
+  /* Vertical ruler — each 1cm = 1cm real */
+  .cm-ruler {
+    width: 12mm;
+    position: relative;
+    flex-shrink: 0;
   }
-  .a4-ruler .cm-mark {
+  .cm-ruler .cm-tick {
     position: absolute;
     left: 0;
     width: 100%;
-    border-top: 1px solid #999;
-    font-size: 7px;
-    color: #666;
-    line-height: 1;
+    height: 0;
+    border-top: 0.5pt solid #888;
   }
-  .a4-ruler .cm-mark .cm-label {
+  .cm-tick.major { border-top-color: #333; border-top-width: 1pt; }
+  .cm-tick .cm-label {
     position: absolute;
-    left: -2px;
-    top: -7px;
-    font-size: 7px;
-    color: #666;
-    transform: translateX(-100%);
-    padding-right: 2px;
+    right: 100%;
+    top: -4pt;
+    font-size: 7pt;
+    color: #333;
+    padding-right: 1mm;
+    white-space: nowrap;
   }
 
-  /* Right: data */
-  .a4-right {
+  /* Fetus image container — height = real cm */
+  .fetus-real-size {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .fetus-real-size img {
+    width: auto;
+    height: 100%;
+    max-width: 60mm;
+    object-fit: contain;
+  }
+
+  /* Right: info panel */
+  .a3-right {
     flex: 1;
+    min-width: 0;
   }
-  .a4-stats-grid {
+  .a3-stats {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 16px;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 4mm;
+    margin-bottom: 6mm;
   }
-  .a4-stat {
+  .a3-stat {
     background: #FFF5F8;
-    border-radius: 8px;
-    padding: 10px;
+    border-radius: 4mm;
+    padding: 3mm;
     text-align: center;
   }
-  .a4-stat .s-val {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--pink);
-  }
-  .a4-stat .s-lbl {
-    font-size: 11px;
-    color: var(--text-light);
-  }
+  .a3-stat .sv { font-size: 14pt; font-weight: 700; color: var(--pink); }
+  .a3-stat .sl { font-size: 8pt; color: var(--text-light); }
 
-  .a4-compare {
+  .a3-compare {
     text-align: center;
-    padding: 12px;
+    padding: 4mm;
     background: #FFF8FA;
-    border-radius: 10px;
-    margin-bottom: 12px;
+    border-radius: 4mm;
+    margin-bottom: 4mm;
   }
-  .a4-compare .c-fruit { font-size: 40px; }
-  .a4-compare .c-text { font-size: 15px; font-weight: 600; margin-top: 4px; }
+  .a3-compare .cf { font-size: 28pt; }
+  .a3-compare .ct { font-size: 11pt; font-weight: 600; margin-top: 1mm; }
 
-  .a4-dev {
-    padding: 12px;
+  .a3-dev {
+    padding: 4mm;
     background: #F5FAFF;
-    border-radius: 8px;
-    font-size: 13px;
-    line-height: 1.7;
+    border-radius: 3mm;
+    font-size: 9pt;
+    line-height: 1.6;
     color: #555;
   }
-  .a4-dev h4 { font-size: 13px; color: var(--blue); margin-bottom: 4px; }
+  .a3-dev h4 { font-size: 9pt; color: var(--blue); margin-bottom: 1mm; }
 
-  .a4-footer {
+  /* Horizontal ruler at bottom */
+  .a3-h-ruler {
+    margin-top: 8mm;
+    border-top: 1pt solid #DDD;
+    padding-top: 2mm;
+  }
+  .a3-h-ruler .h-ruler-label { font-size: 7pt; color: #999; text-align: center; margin-bottom: 1mm; }
+  .h-ruler-bar {
+    position: relative;
+    height: 8mm;
+    border-bottom: 1pt solid #666;
+    margin: 0 5mm;
+  }
+  .h-ruler-bar .ht {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    border-left: 0.5pt solid #888;
+  }
+  .h-ruler-bar .ht.major { border-left-color: #333; border-left-width: 0.8pt; }
+  .h-ruler-bar .ht .hl {
+    position: absolute;
+    top: 100%;
+    left: -3mm;
+    font-size: 6pt;
+    color: #333;
+    padding-top: 0.5mm;
+  }
+
+  .a3-footer {
     text-align: center;
-    margin-top: 20px;
-    padding-top: 12px;
-    border-top: 1px solid #EEE;
-    font-size: 10px;
+    margin-top: 6mm;
+    font-size: 7pt;
     color: #CCC;
+    border-top: 0.5pt solid #EEE;
+    padding-top: 2mm;
   }
 
-  /* Full-width size bar at bottom of A4 */
-  .a4-size-bar {
-    margin-top: 16px;
-    text-align: center;
-  }
-  .a4-size-bar .size-label {
-    font-size: 12px;
-    color: var(--text-light);
-    margin-bottom: 4px;
-  }
-  .a4-size-bar canvas {
-    display: block;
-    margin: 0 auto;
-  }
-
-  /* Action buttons */
   .action-btns { display: flex; gap: 12px; margin-top: 12px; }
   .action-btn {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    border-radius: 12px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.15s;
+    flex: 1; padding: 12px; border: none; border-radius: 12px;
+    font-size: 15px; font-weight: 600; cursor: pointer; transition: transform 0.15s;
   }
   .action-btn:hover { transform: translateY(-1px); }
   .btn-download { background: linear-gradient(135deg, var(--pink), #E876A0); color: white; }
   .btn-print { background: var(--card-bg); color: var(--pink); border: 2px solid var(--pink) !important; }
-
   .footer { text-align: center; padding: 24px; font-size: 12px; color: #CCC; }
 
-  /* Print styles */
+  /* Print: A3 landscape */
   @media print {
     body { background: white !important; padding: 0 !important; margin: 0 !important; }
-    .header, .form-section, .result-section > *:not(#a4PrintCard), .action-btns, .footer { display: none !important; }
+    .header, .form-section, .result-section > *:not(#a3PrintCard), .action-btns, .footer { display: none !important; }
     .result-section.show { display: block !important; }
-    #a4PrintCard { box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
-    .a4-preview {
+    #a3PrintCard { box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
+    .a3-card h3 { display: none !important; }
+    .a3-preview {
       border: none !important;
-      padding: 15mm !important;
-      min-height: auto !important;
+      transform: none !important;
       margin: 0 !important;
+      width: 420mm !important;
+      min-height: 297mm !important;
+      padding: 12mm 15mm !important;
     }
     .no-print { display: none !important; }
-    .a4-header h2, .a4-stat .s-val { -webkit-text-fill-color: var(--pink) !important; color: var(--pink) !important; }
-    @page { size: A4; margin: 0; }
+    @page { size: A3 landscape; margin: 0; }
   }
 
   @media (max-width: 480px) {
     .header h1 { font-size: 22px; }
-    .a4-body { flex-direction: column; }
+    .a3-preview { transform: scale(0.25); margin-bottom: -210mm; }
   }
 </style>
 </head>
@@ -370,7 +288,6 @@
 <div class="form-section">
   <div class="form-card">
     <h2>📋 B 超数据输入</h2>
-
     <div class="input-group">
       <label><span>双顶径 (BPD) <span class="full-name">胎头最宽</span></span><span class="unit">cm</span></label>
       <input type="number" id="bpd" placeholder="例如：5.0" step="0.1" min="1" max="12">
@@ -387,9 +304,7 @@
       <label><span>股骨长 (FL) <span class="full-name">大腿骨</span></span><span class="unit">cm</span></label>
       <input type="number" id="fl" placeholder="例如：3.5" step="0.1" min="0.5" max="10">
     </div>
-
     <button class="calc-btn" onclick="calculate()">🦞 看看宝宝有多大</button>
-
     <div class="presets">
       <span style="font-size:12px;color:#BBB;line-height:28px;">快速：</span>
       <button class="preset-btn" onclick="fillPreset(12)">12周</button>
@@ -408,7 +323,6 @@
   <div class="info-grid" id="infoGrid"></div>
   <div class="comparison-card" id="comparisonCard"></div>
 
-  <!-- Fetus Image -->
   <div class="fetus-card">
     <h3>🎨 宝宝真实照片</h3>
     <div class="fetus-img-wrap">
@@ -417,16 +331,16 @@
     <div class="ruler-info" id="rulerInfo"></div>
   </div>
 
-  <!-- A4 Print Area -->
-  <div class="a4-card" id="a4PrintCard">
-    <h3>📄 A4 打印预览</h3>
-    <div class="a4-preview" id="a4Preview"></div>
+  <!-- A3 Print Area -->
+  <div class="a3-card no-print" id="a3PrintCard">
+    <h3>📄 A3 打印预览（横向）</h3>
+    <div class="a3-preview" id="a3Preview"></div>
   </div>
 
   <div class="form-section">
     <div class="action-btns no-print">
-      <button class="action-btn btn-download" onclick="downloadA4()">⬇️ 下载图片</button>
-      <button class="action-btn btn-print" onclick="window.print()">🖨️ 打印 A4</button>
+      <button class="action-btn btn-download" onclick="downloadA3()">⬇️ 下载图片</button>
+      <button class="action-btn btn-print" onclick="window.print()">🖨️ 打印 A3</button>
     </div>
   </div>
 </div>
@@ -434,74 +348,71 @@
 <div class="footer">🦞 宝宝真实大小 · 数据仅供参考 · 请以医生诊断为准</div>
 
 <script>
-// ====== Growth data ======
 const GROWTH_TABLE = [
-  { week: 12, bpd: 2.0, hc: 7.0,  ac: 5.6,  fl: 0.8,  length: 9,    weight: 14 },
-  { week: 13, bpd: 2.4, hc: 8.4,  ac: 6.7,  fl: 1.0,  length: 10,   weight: 23 },
-  { week: 14, bpd: 2.8, hc: 10.0, ac: 8.0,  fl: 1.3,  length: 13,   weight: 43 },
-  { week: 15, bpd: 3.2, hc: 11.5, ac: 9.3,  fl: 1.7,  length: 14,   weight: 70 },
-  { week: 16, bpd: 3.5, hc: 12.8, ac: 10.5, fl: 2.0,  length: 16,   weight: 110 },
-  { week: 17, bpd: 3.8, hc: 13.8, ac: 11.5, fl: 2.3,  length: 18,   weight: 150 },
-  { week: 18, bpd: 4.2, hc: 15.0, ac: 12.8, fl: 2.6,  length: 20,   weight: 200 },
-  { week: 19, bpd: 4.5, hc: 16.2, ac: 13.8, fl: 2.9,  length: 22,   weight: 240 },
-  { week: 20, bpd: 4.9, hc: 17.5, ac: 15.0, fl: 3.3,  length: 25,   weight: 300 },
-  { week: 21, bpd: 5.2, hc: 18.5, ac: 16.0, fl: 3.6,  length: 27,   weight: 380 },
-  { week: 22, bpd: 5.5, hc: 19.5, ac: 17.0, fl: 3.9,  length: 28,   weight: 460 },
-  { week: 23, bpd: 5.8, hc: 20.5, ac: 18.0, fl: 4.2,  length: 29,   weight: 540 },
-  { week: 24, bpd: 6.0, hc: 21.5, ac: 19.0, fl: 4.5,  length: 30,   weight: 600 },
-  { week: 25, bpd: 6.3, hc: 22.5, ac: 20.0, fl: 4.7,  length: 32,   weight: 700 },
-  { week: 26, bpd: 6.6, hc: 23.3, ac: 21.0, fl: 4.9,  length: 34,   weight: 800 },
-  { week: 27, bpd: 6.8, hc: 24.0, ac: 21.8, fl: 5.2,  length: 35,   weight: 950 },
-  { week: 28, bpd: 7.1, hc: 25.0, ac: 22.8, fl: 5.4,  length: 37,   weight: 1100 },
-  { week: 29, bpd: 7.3, hc: 25.8, ac: 23.6, fl: 5.6,  length: 38,   weight: 1250 },
-  { week: 30, bpd: 7.6, hc: 26.6, ac: 24.5, fl: 5.8,  length: 39,   weight: 1400 },
-  { week: 31, bpd: 7.8, hc: 27.3, ac: 25.3, fl: 6.0,  length: 40,   weight: 1600 },
-  { week: 32, bpd: 8.0, hc: 28.0, ac: 26.0, fl: 6.2,  length: 42,   weight: 1800 },
-  { week: 33, bpd: 8.2, hc: 28.7, ac: 26.8, fl: 6.4,  length: 43,   weight: 2000 },
-  { week: 34, bpd: 8.5, hc: 29.5, ac: 27.5, fl: 6.6,  length: 44,   weight: 2250 },
-  { week: 35, bpd: 8.7, hc: 30.2, ac: 28.2, fl: 6.7,  length: 45,   weight: 2500 },
-  { week: 36, bpd: 8.8, hc: 30.7, ac: 29.0, fl: 6.9,  length: 47,   weight: 2700 },
-  { week: 37, bpd: 9.0, hc: 31.2, ac: 29.8, fl: 7.1,  length: 48,   weight: 2950 },
-  { week: 38, bpd: 9.2, hc: 31.7, ac: 30.5, fl: 7.2,  length: 49,   weight: 3100 },
-  { week: 39, bpd: 9.4, hc: 32.2, ac: 31.2, fl: 7.3,  length: 50,   weight: 3300 },
-  { week: 40, bpd: 9.5, hc: 32.8, ac: 32.0, fl: 7.5,  length: 51,   weight: 3400 },
+  { week: 12, bpd: 2.0, hc: 7.0,  ac: 5.6,  fl: 0.8,  length: 9,   weight: 14 },
+  { week: 13, bpd: 2.4, hc: 8.4,  ac: 6.7,  fl: 1.0,  length: 10,  weight: 23 },
+  { week: 14, bpd: 2.8, hc: 10.0, ac: 8.0,  fl: 1.3,  length: 13,  weight: 43 },
+  { week: 15, bpd: 3.2, hc: 11.5, ac: 9.3,  fl: 1.7,  length: 14,  weight: 70 },
+  { week: 16, bpd: 3.5, hc: 12.8, ac: 10.5, fl: 2.0,  length: 16,  weight: 110 },
+  { week: 17, bpd: 3.8, hc: 13.8, ac: 11.5, fl: 2.3,  length: 18,  weight: 150 },
+  { week: 18, bpd: 4.2, hc: 15.0, ac: 12.8, fl: 2.6,  length: 20,  weight: 200 },
+  { week: 19, bpd: 4.5, hc: 16.2, ac: 13.8, fl: 2.9,  length: 22,  weight: 240 },
+  { week: 20, bpd: 4.9, hc: 17.5, ac: 15.0, fl: 3.3,  length: 25,  weight: 300 },
+  { week: 21, bpd: 5.2, hc: 18.5, ac: 16.0, fl: 3.6,  length: 27,  weight: 380 },
+  { week: 22, bpd: 5.5, hc: 19.5, ac: 17.0, fl: 3.9,  length: 28,  weight: 460 },
+  { week: 23, bpd: 5.8, hc: 20.5, ac: 18.0, fl: 4.2,  length: 29,  weight: 540 },
+  { week: 24, bpd: 6.0, hc: 21.5, ac: 19.0, fl: 4.5,  length: 30,  weight: 600 },
+  { week: 25, bpd: 6.3, hc: 22.5, ac: 20.0, fl: 4.7,  length: 32,  weight: 700 },
+  { week: 26, bpd: 6.6, hc: 23.3, ac: 21.0, fl: 4.9,  length: 34,  weight: 800 },
+  { week: 27, bpd: 6.8, hc: 24.0, ac: 21.8, fl: 5.2,  length: 35,  weight: 950 },
+  { week: 28, bpd: 7.1, hc: 25.0, ac: 22.8, fl: 5.4,  length: 37,  weight: 1100 },
+  { week: 29, bpd: 7.3, hc: 25.8, ac: 23.6, fl: 5.6,  length: 38,  weight: 1250 },
+  { week: 30, bpd: 7.6, hc: 26.6, ac: 24.5, fl: 5.8,  length: 39,  weight: 1400 },
+  { week: 31, bpd: 7.8, hc: 27.3, ac: 25.3, fl: 6.0,  length: 40,  weight: 1600 },
+  { week: 32, bpd: 8.0, hc: 28.0, ac: 26.0, fl: 6.2,  length: 42,  weight: 1800 },
+  { week: 33, bpd: 8.2, hc: 28.7, ac: 26.8, fl: 6.4,  length: 43,  weight: 2000 },
+  { week: 34, bpd: 8.5, hc: 29.5, ac: 27.5, fl: 6.6,  length: 44,  weight: 2250 },
+  { week: 35, bpd: 8.7, hc: 30.2, ac: 28.2, fl: 6.7,  length: 45,  weight: 2500 },
+  { week: 36, bpd: 8.8, hc: 30.7, ac: 29.0, fl: 6.9,  length: 47,  weight: 2700 },
+  { week: 37, bpd: 9.0, hc: 31.2, ac: 29.8, fl: 7.1,  length: 48,  weight: 2950 },
+  { week: 38, bpd: 9.2, hc: 31.7, ac: 30.5, fl: 7.2,  length: 49,  weight: 3100 },
+  { week: 39, bpd: 9.4, hc: 32.2, ac: 31.2, fl: 7.3,  length: 50,  weight: 3300 },
+  { week: 40, bpd: 9.5, hc: 32.8, ac: 32.0, fl: 7.5,  length: 51,  weight: 3400 },
 ];
 
-// ====== AI fetus images for different gestational age ranges ======
 const FETUS_IMAGES = [
-  { maxWeek: 16, src: 'images/fetus_12w.png', desc: '孕早期胎儿' },
-  { maxWeek: 24, src: 'images/fetus_20w.png', desc: '孕中期胎儿' },
-  { maxWeek: 32, src: 'images/fetus_28w.png', desc: '孕晚期胎儿' },
-  { maxWeek: 99, src: 'images/fetus_36w.png', desc: '足月胎儿' },
+  { maxWeek: 16, src: 'images/fetus_12w.png' },
+  { maxWeek: 24, src: 'images/fetus_20w.png' },
+  { maxWeek: 32, src: 'images/fetus_28w.png' },
+  { maxWeek: 99, src: 'images/fetus_36w.png' },
 ];
 
-// ====== Comparison objects ======
 const COMPARISONS = [
-  { maxLen: 2,   emoji: '🫘', name: '一颗小豆子', msg: '宝宝还是一颗小豆子呢～' },
-  { maxLen: 3,   emoji: '🫐', name: '一颗蓝莓', msg: '你的宝宝像一颗蓝莓那么大！' },
-  { maxLen: 5,   emoji: '🍓', name: '一颗草莓', msg: '你的宝宝像一颗草莓！' },
-  { maxLen: 7,   emoji: '🍑', name: '一颗小桃子', msg: '你的宝宝像一颗小桃子～' },
-  { maxLen: 10,  emoji: '🥝', name: '一个猕猴桃', msg: '你的宝宝像一个猕猴桃！' },
-  { maxLen: 14,  emoji: '🍋', name: '一个柠檬', msg: '你的宝宝像一个柠檬！' },
-  { maxLen: 18,  emoji: '🥑', name: '一个牛油果', msg: '你的宝宝像一个牛油果！' },
-  { maxLen: 22,  emoji: '🥭', name: '一个小芒果', msg: '你的宝宝像一个小芒果！' },
-  { maxLen: 26,  emoji: '🌽', name: '一根玉米', msg: '你的宝宝像一根玉米那么长！' },
-  { maxLen: 30,  emoji: '🍌', name: '一根大香蕉', msg: '你的宝宝像一根大香蕉！' },
-  { maxLen: 35,  emoji: '🍆', name: '一根茄子', msg: '你的宝宝像一根茄子！' },
-  { maxLen: 39,  emoji: '🍍', name: '一个菠萝', msg: '你的宝宝像一个菠萝！' },
-  { maxLen: 43,  emoji: '🍈', name: '一个哈密瓜', msg: '你的宝宝像一个哈密瓜那么大！' },
-  { maxLen: 47,  emoji: '🥥', name: '一个椰子', msg: '你的宝宝像一个椰子！' },
-  { maxLen: 51,  emoji: '🍉', name: '一个小西瓜', msg: '你的宝宝快像一个小西瓜啦！' },
-  { maxLen: 99,  emoji: '🎃', name: '一个大南瓜', msg: '你的宝宝已经很大啦！' },
+  { maxLen: 2,  emoji: '🫘', name: '一颗小豆子', msg: '宝宝还是一颗小豆子呢～' },
+  { maxLen: 3,  emoji: '🫐', name: '一颗蓝莓', msg: '你的宝宝像一颗蓝莓那么大！' },
+  { maxLen: 5,  emoji: '🍓', name: '一颗草莓', msg: '你的宝宝像一颗草莓！' },
+  { maxLen: 7,  emoji: '🍑', name: '一颗小桃子', msg: '你的宝宝像一颗小桃子～' },
+  { maxLen: 10, emoji: '🥝', name: '一个猕猴桃', msg: '你的宝宝像一个猕猴桃！' },
+  { maxLen: 14, emoji: '🍋', name: '一个柠檬', msg: '你的宝宝像一个柠檬！' },
+  { maxLen: 18, emoji: '🥑', name: '一个牛油果', msg: '你的宝宝像一个牛油果！' },
+  { maxLen: 22, emoji: '🥭', name: '一个小芒果', msg: '你的宝宝像一个小芒果！' },
+  { maxLen: 26, emoji: '🌽', name: '一根玉米', msg: '你的宝宝像一根玉米那么长！' },
+  { maxLen: 30, emoji: '🍌', name: '一根大香蕉', msg: '你的宝宝像一根大香蕉！' },
+  { maxLen: 35, emoji: '🍆', name: '一根茄子', msg: '你的宝宝像一根茄子！' },
+  { maxLen: 39, emoji: '🍍', name: '一个菠萝', msg: '你的宝宝像一个菠萝！' },
+  { maxLen: 43, emoji: '🍈', name: '一个哈密瓜', msg: '你的宝宝像一个哈密瓜那么大！' },
+  { maxLen: 47, emoji: '🥥', name: '一个椰子', msg: '你的宝宝像一个椰子！' },
+  { maxLen: 51, emoji: '🍉', name: '一个小西瓜', msg: '你的宝宝快像一个小西瓜啦！' },
+  { maxLen: 99, emoji: '🎃', name: '一个大南瓜', msg: '你的宝宝已经很大啦！' },
 ];
 
 function fillPreset(week) {
-  const data = GROWTH_TABLE.find(d => d.week === week);
-  if (!data) return;
-  document.getElementById('bpd').value = data.bpd;
-  document.getElementById('hc').value = data.hc;
-  document.getElementById('ac').value = data.ac;
-  document.getElementById('fl').value = data.fl;
+  const d = GROWTH_TABLE.find(d => d.week === week);
+  if (!d) return;
+  document.getElementById('bpd').value = d.bpd;
+  document.getElementById('hc').value = d.hc;
+  document.getElementById('ac').value = d.ac;
+  document.getElementById('fl').value = d.fl;
   calculate();
 }
 
@@ -510,289 +421,207 @@ function calculate() {
   const hc = parseFloat(document.getElementById('hc').value);
   const ac = parseFloat(document.getElementById('ac').value);
   const fl = parseFloat(document.getElementById('fl').value);
-
   if (!bpd || bpd <= 0) { alert('请输入双顶径（BPD）！'); return; }
 
-  let result = estimateWeek(bpd, fl, hc, ac);
-  let comp = getComparison(result.length);
-  let fetusImg = getFetusImage(result.week);
-
-  showResults(result, comp, fetusImg, bpd, hc, ac, fl);
+  const r = estimateWeek(bpd, fl, hc, ac);
+  const comp = getComparison(r.length);
+  const fetusImg = getFetusImage(r.week);
+  showResults(r, comp, fetusImg, bpd, hc, ac, fl);
 }
 
 function estimateWeek(bpd, fl, hc, ac) {
-  let bestDiff = Infinity, bestEntry = GROWTH_TABLE[0];
-  for (let entry of GROWTH_TABLE) {
-    let diff = Math.abs(entry.bpd - bpd);
-    if (diff < bestDiff) { bestDiff = diff; bestEntry = entry; }
+  let bestDiff = Infinity, best = GROWTH_TABLE[0];
+  for (const e of GROWTH_TABLE) {
+    const d = Math.abs(e.bpd - bpd);
+    if (d < bestDiff) { bestDiff = d; best = e; }
   }
-
-  let estimatedWeek = bestEntry.week;
-  let idx = GROWTH_TABLE.indexOf(bestEntry);
-  if (idx < GROWTH_TABLE.length - 1 && idx > 0) {
-    let prev = GROWTH_TABLE[idx - 1];
-    let next = GROWTH_TABLE[idx + 1];
-    if (bpd > bestEntry.bpd && next) {
-      let ratio = (bpd - bestEntry.bpd) / (next.bpd - bestEntry.bpd);
-      estimatedWeek = bestEntry.week + ratio;
-    } else if (bpd < bestEntry.bpd && prev) {
-      let ratio = (bestEntry.bpd - bpd) / (bestEntry.bpd - prev.bpd);
-      estimatedWeek = bestEntry.week - ratio;
-    }
-  }
-
-  let length = bestEntry.length;
-  let weight = bestEntry.weight;
-
-  if (fl && fl > 0) {
-    let flLength = fl * 7;
-    length = Math.round((length + flLength) / 2);
-  }
-
+  let length = best.length;
+  let weight = best.weight;
+  if (fl > 0) length = Math.round((length + fl * 7) / 2);
   if (hc && ac && fl) {
-    let logWeight = 1.326 + 0.0107 * hc + 0.0438 * ac + 0.158 * fl - 0.00326 * ac * fl;
-    weight = Math.round(Math.pow(10, logWeight));
+    const logW = 1.326 + 0.0107*hc + 0.0438*ac + 0.158*fl - 0.00326*ac*fl;
+    weight = Math.round(Math.pow(10, logW));
   }
-
-  return { week: bestEntry.week, estimatedWeek, length, weight };
+  return { week: best.week, length, weight };
 }
 
 function getComparison(length) {
-  for (let comp of COMPARISONS) {
-    if (length <= comp.maxLen) return comp;
-  }
+  for (const c of COMPARISONS) if (length <= c.maxLen) return c;
   return COMPARISONS[COMPARISONS.length - 1];
 }
 
 function getFetusImage(week) {
-  for (let img of FETUS_IMAGES) {
-    if (week <= img.maxWeek) return img;
-  }
+  for (const img of FETUS_IMAGES) if (week <= img.maxWeek) return img;
   return FETUS_IMAGES[FETUS_IMAGES.length - 1];
 }
 
-function showResults(result, comp, fetusImg, bpd, hc, ac, fl) {
+function showResults(r, comp, fetusImg, bpd, hc, ac, fl) {
   const section = document.getElementById('resultSection');
   section.classList.add('show');
+  const wk = Math.round(r.week);
+  const ws = r.weight >= 1000 ? (r.weight/1000).toFixed(1)+' kg' : r.weight+' g';
 
-  const gestWeek = Math.round(result.week);
-  const { length, weight } = result;
-
-  // Info cards
   document.getElementById('infoGrid').innerHTML = `
-    <div class="info-card"><div class="emoji">📅</div><div class="value">${gestWeek}周</div><div class="label">估计孕周</div></div>
-    <div class="info-card"><div class="emoji">📏</div><div class="value">${length} cm</div><div class="label">估计身长</div></div>
-    <div class="info-card"><div class="emoji">⚖️</div><div class="value">${weight >= 1000 ? (weight/1000).toFixed(1) + ' kg' : weight + ' g'}</div><div class="label">估计体重</div></div>
-    <div class="info-card"><div class="emoji">${comp.emoji}</div><div class="value">${comp.name}</div><div class="label">真实大小参照</div></div>
-  `;
+    <div class="info-card"><div class="emoji">📅</div><div class="value">${wk}周</div><div class="label">估计孕周</div></div>
+    <div class="info-card"><div class="emoji">📏</div><div class="value">${r.length} cm</div><div class="label">估计身长</div></div>
+    <div class="info-card"><div class="emoji">⚖️</div><div class="value">${ws}</div><div class="label">估计体重</div></div>
+    <div class="info-card"><div class="emoji">${comp.emoji}</div><div class="value">${comp.name}</div><div class="label">真实大小参照</div></div>`;
 
-  // Comparison
   document.getElementById('comparisonCard').innerHTML = `
     <div class="fruit-emoji">${comp.emoji}</div>
     <div class="message">${comp.msg}</div>
-    <div class="sub-msg">身长约 ${length} cm，体重约 ${weight >= 1000 ? (weight/1000).toFixed(1) + ' 千克' : weight + ' 克'}</div>
-  `;
+    <div class="sub-msg">身长约 ${r.length} cm，体重约 ${ws}</div>`;
 
-  // Fetus image
-  const imgEl = document.getElementById('fetusImg');
-  imgEl.src = fetusImg.src;
-  imgEl.alt = fetusImg.desc;
-  document.getElementById('rulerInfo').textContent = `${fetusImg.desc} · ${gestWeek}周 · 约 ${length} cm`;
+  document.getElementById('fetusImg').src = fetusImg.src;
+  document.getElementById('rulerInfo').textContent = `孕 ${wk} 周 · 约 ${r.length} cm`;
 
-  // A4 preview
-  generateA4(gestWeek, length, weight, comp, bpd, hc, ac, fl, fetusImg);
-
+  generateA3(wk, r.length, r.weight, comp, bpd, hc, ac, fl, fetusImg);
   section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ====== Generate A4 preview with real-size ruler ======
-function generateA4(week, length, weight, comp, bpd, hc, ac, fl, fetusImg) {
-  const preview = document.getElementById('a4Preview');
-  const devInfo = getDevInfo(week);
-  const weightStr = weight >= 1000 ? (weight/1000).toFixed(1) + ' kg' : weight + ' g';
+// ====== A3 Layout with REAL cm units ======
+function generateA3(week, length, weight, comp, bpd, hc, ac, fl, fetusImg) {
+  const ws = weight >= 1000 ? (weight/1000).toFixed(1)+' kg' : weight+' g';
+  const preview = document.getElementById('a3Preview');
 
-  // Calculate how many pixels = 1cm on screen (assuming 96dpi, 1cm = ~37.8px)
-  // For A4 print, we use CSS mm units which are accurate
-  // Show ruler up to the fetus length (max 55cm, but cap display at reasonable height)
-  const displayCm = Math.min(length, 55);
+  // A3 landscape usable area: ~390mm wide x 273mm tall (minus margins)
+  // Left panel: ruler (12mm) + gap (3mm) + image area (~60mm) = ~75mm
+  // Right panel: rest = ~315mm
+
+  // The fetus image height in cm (use actual length, cap at 27cm to fit)
+  const displayCm = Math.min(length, 27);
+
+  // Build ruler ticks
+  let rulerHTML = '';
+  for (let i = 0; i <= displayCm + 2; i++) {
+    const cls = i % 5 === 0 ? 'cm-tick major' : 'cm-tick';
+    const label = i % 2 === 0 ? `<span class="cm-label">${i}</span>` : '';
+    rulerHTML += `<div class="${cls}" style="bottom:${i}cm">${label}</div>`;
+  }
+
+  // Build horizontal ruler (show up to length+5 cm)
+  const hRulerCm = Math.min(length + 5, 55);
+  let hRulerHTML = '';
+  for (let i = 0; i <= hRulerCm; i++) {
+    const cls = i % 5 === 0 ? 'ht major' : 'ht';
+    const left = (i / hRulerCm * 100).toFixed(2);
+    const label = i % 2 === 0 ? `<span class="hl">${i}cm</span>` : '';
+    hRulerHTML += `<div class="${cls}" style="left:${left}%">${label}</div>`;
+  }
 
   preview.innerHTML = `
-    <div class="a4-header">
-      <h2>🍼 你的宝宝 ${week} 周啦！</h2>
-      <div class="a4-sub">宝宝真实大小纪念卡 · ${new Date().toLocaleDateString('zh-CN')}</div>
-    </div>
+    <div class="a3-title">🍼 你的宝宝 ${week} 周啦！</div>
+    <div class="a3-subtitle">宝宝真实大小纪念卡 · 打印后标尺为实际厘米 (A3 横向) · ${new Date().toLocaleDateString('zh-CN')}</div>
 
-    <div class="a4-body">
-      <div class="a4-left" style="position:relative; padding-left: 28px;">
-        <!-- Real-size ruler -->
-        <div class="a4-ruler" id="a4Ruler" style="height:${displayCm * 10}px;"></div>
-        <!-- Fetus image -->
-        <img class="a4-fetus-img" src="${fetusImg.src}" alt="${fetusImg.desc}" style="height:${Math.min(200, displayCm * 4)}px;">
+    <div class="a3-main">
+      <!-- Left: Real-size ruler + fetus image -->
+      <div class="a3-left">
+        <div class="cm-ruler" style="height:${displayCm}cm">
+          ${rulerHTML}
+        </div>
+        <div class="fetus-real-size" style="height:${displayCm}cm;">
+          <img src="${fetusImg.src}" alt="胎儿">
+        </div>
       </div>
-      <div class="a4-right">
-        <div class="a4-stats-grid">
-          <div class="a4-stat"><div class="s-val">${week}周</div><div class="s-lbl">孕周</div></div>
-          <div class="a4-stat"><div class="s-val">${length} cm</div><div class="s-lbl">身长</div></div>
-          <div class="a4-stat"><div class="s-val">${weightStr}</div><div class="s-lbl">体重</div></div>
-          <div class="a4-stat"><div class="s-val">${bpd} cm</div><div class="s-lbl">双顶径</div></div>
-          ${hc ? `<div class="a4-stat"><div class="s-val">${hc} cm</div><div class="s-lbl">头围</div></div>` : ''}
-          ${ac ? `<div class="a4-stat"><div class="s-val">${ac} cm</div><div class="s-lbl">腹围</div></div>` : ''}
-          ${fl ? `<div class="a4-stat"><div class="s-val">${fl} cm</div><div class="s-lbl">股骨长</div></div>` : ''}
+
+      <!-- Right: Data -->
+      <div class="a3-right">
+        <div class="a3-stats">
+          <div class="a3-stat"><div class="sv">${week}周</div><div class="sl">孕周</div></div>
+          <div class="a3-stat"><div class="sv">${length} cm</div><div class="sl">身长</div></div>
+          <div class="a3-stat"><div class="sv">${ws}</div><div class="sl">体重</div></div>
+          <div class="a3-stat"><div class="sv">${bpd} cm</div><div class="sl">双顶径 (BPD)</div></div>
+          ${hc ? `<div class="a3-stat"><div class="sv">${hc} cm</div><div class="sl">头围 (HC)</div></div>` : '<div class="a3-stat" style="opacity:0.3"><div class="sv">--</div><div class="sl">头围 (HC)</div></div>'}
+          ${ac ? `<div class="a3-stat"><div class="sv">${ac} cm</div><div class="sl">腹围 (AC)</div></div>` : '<div class="a3-stat" style="opacity:0.3"><div class="sv">--</div><div class="sl">腹围 (AC)</div></div>'}
+          ${fl ? `<div class="a3-stat"><div class="sv">${fl} cm</div><div class="sl">股骨长 (FL)</div></div>` : '<div class="a3-stat" style="opacity:0.3"><div class="sv">--</div><div class="sl">股骨长 (FL)</div></div>'}
         </div>
-        <div class="a4-compare">
-          <div class="c-fruit">${comp.emoji}</div>
-          <div class="c-text">${comp.msg}</div>
+
+        <div class="a3-compare">
+          <div class="cf">${comp.emoji}</div>
+          <div class="ct">${comp.msg}</div>
         </div>
-        <div class="a4-dev">
+
+        <div class="a3-dev">
           <h4>🌱 发育小贴士</h4>
-          ${devInfo}
+          ${getDevInfo(week)}
+        </div>
+
+        <!-- Horizontal ruler -->
+        <div class="a3-h-ruler">
+          <div class="h-ruler-label">📏 真实尺寸标尺（打印后为实际厘米）· 左侧竖尺 ${displayCm} cm</div>
+          <div class="h-ruler-bar" style="height:6mm">
+            ${hRulerHTML}
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="a4-size-bar">
-      <div class="size-label">📏 真实尺寸标尺（打印后为实际厘米）</div>
-      <canvas id="rulerCanvas" width="500" height="40"></canvas>
-    </div>
+    <div class="a3-footer">
+      🦞 宝宝真实大小 · 数据仅供参考 · 请以医生诊断为准 · 左侧标尺每个刻度 = 1cm（打印后真实尺寸）
+    </div>`;
 
-    <div class="a4-footer">
-      🦞 宝宝真实大小 · 数据仅供参考 · 请以医生诊断为准 · ${new Date().toLocaleDateString('zh-CN')}
-    </div>
-  `;
-
-  // Draw ruler marks on the side ruler
-  drawSideRuler(displayCm);
-
-  // Draw horizontal cm ruler at bottom
-  drawHorizontalRuler(Math.min(length + 5, 55));
-}
-
-function drawSideRuler(maxCm) {
-  const ruler = document.getElementById('a4Ruler');
-  if (!ruler) return;
-  ruler.innerHTML = '';
-  for (let i = 0; i <= maxCm; i++) {
-    const mark = document.createElement('div');
-    mark.className = 'cm-mark';
-    mark.style.top = (i * 10) + 'px';
-    if (i % 2 === 0) {
-      mark.innerHTML = `<span class="cm-label">${i}</span>`;
-    }
-    ruler.appendChild(mark);
-  }
-}
-
-function drawHorizontalRuler(maxCm) {
-  const canvas = document.getElementById('rulerCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
-  ctx.clearRect(0, 0, W, H);
-
-  // Scale: W pixels = maxCm cm
-  const pxPerCm = (W - 20) / maxCm;
-
-  ctx.strokeStyle = '#666';
-  ctx.fillStyle = '#666';
-  ctx.lineWidth = 1;
-  ctx.font = '10px sans-serif';
-
-  // Main line
-  ctx.beginPath();
-  ctx.moveTo(10, 20);
-  ctx.lineTo(10 + maxCm * pxPerCm, 20);
-  ctx.stroke();
-
-  for (let i = 0; i <= maxCm; i++) {
-    const x = 10 + i * pxPerCm;
-    const tickH = (i % 5 === 0) ? 12 : 6;
-    ctx.beginPath();
-    ctx.moveTo(x, 20);
-    ctx.lineTo(x, 20 - tickH);
-    ctx.stroke();
-    if (i % 2 === 0) {
-      ctx.fillText(i + 'cm', x - 8, 35);
-    }
-  }
+  // Show A3 card (remove no-print so it's visible on screen)
+  document.getElementById('a3PrintCard').classList.remove('no-print');
 }
 
 function getDevInfo(week) {
-  const infos = {
-    12: '宝宝开始有反射动作了！手指和脚趾已经分开，可以握拳。',
-    13: '宝宝开始长出细小的指纹，独一无二的身份标识正在形成。',
-    14: '宝宝可以做鬼脸啦！皱眉、微笑的面部表情开始出现。',
-    15: '宝宝能感受到光线了，虽然眼睛还闭着，但对光有反应。',
-    16: '宝宝开始能听到声音了！可以开始给ta讲故事、放音乐。',
-    17: '脂肪开始形成，宝宝不再透明了。骨骼也在变硬。',
-    18: '如果是个女孩，子宫和输卵管已经形成。',
-    19: '感觉器官快速发育，味觉、嗅觉、触觉都在建立。',
-    20: '胎动越来越明显了！宝宝开始吞咽羊水。',
-    21: '宝宝的眉毛和眼皮已经完全形成了，看起来像个小人。',
-    22: '眼睛已经形成，但虹膜还没有颜色。',
-    23: '听力更加敏锐，能辨认妈妈的声音了。',
-    24: '宝宝有了睡眠周期，醒着和睡觉的时间交替。',
-    25: '大脑对触觉有反应了，如果你摸肚子，ta可能会回应！',
-    26: '眼睛第一次睁开！虽然还看不清东西。',
-    27: '宝宝开始有规律的呼吸动作（练习中）。',
-    28: '进入孕晚期！宝宝可以做梦了（REM睡眠出现）。',
-    29: '骨骼完全发育，但仍然很柔软，方便通过产道。',
-    30: '宝宝头发开始长出来，可能已经有了胎毛。',
-    31: '所有感官都已运作，宝宝能看到、听到、尝到。',
-    32: '脚趾甲和手指甲完全长好了。',
-    33: '免疫系统开始建立，从妈妈那里获取抗体。',
-    34: '肺部发育接近成熟，如果现在出生存活率很高。',
-    35: '肾脏功能完善，肝脏也能处理一些废物了。',
-    36: '宝宝越来越重，子宫里的空间变小了。',
-    37: '足月！宝宝已经准备好来到这个世界。',
-    38: '继续增重中，脂肪储备帮助出生后保持体温。',
-    39: '器官全部成熟，宝宝随时可能发动哦！',
-    40: '预产期到了！宝宝已经准备好和爸爸妈妈见面了 🎉',
+  const m = {
+    12:'宝宝开始有反射动作了！手指和脚趾已经分开，可以握拳。',
+    14:'宝宝可以做鬼脸啦！皱眉、微笑的面部表情开始出现。',
+    16:'宝宝开始能听到声音了！可以开始给ta讲故事、放音乐。',
+    18:'感觉器官快速发育，味觉、嗅觉、触觉都在建立。',
+    20:'胎动越来越明显了！宝宝开始吞咽羊水。',
+    22:'眼睛已经形成，但虹膜还没有颜色。',
+    24:'宝宝有了睡眠周期，醒着和睡觉的时间交替。',
+    26:'眼睛第一次睁开！虽然还看不清东西。',
+    28:'进入孕晚期！宝宝可以做梦了（REM睡眠出现）。',
+    30:'宝宝头发开始长出来，可能已经有了胎毛。',
+    32:'脚趾甲和手指甲完全长好了。',
+    34:'肺部发育接近成熟，如果现在出生存活率很高。',
+    36:'宝宝越来越重，子宫里的空间变小了。',
+    38:'足月！继续增重中，脂肪储备帮助出生后保持体温。',
+    40:'预产期到了！宝宝已经准备好和爸爸妈妈见面了 🎉',
   };
-  return infos[week] || infos[40];
+  // Find closest
+  let best = '', bestD = Infinity;
+  for (const [k,v] of Object.entries(m)) { const d = Math.abs(k-week); if(d<bestD){bestD=d;best=v;} }
+  return best;
 }
 
-// ====== Download A4 ======
-async function downloadA4() {
-  const preview = document.getElementById('a4Preview');
+// ====== Download ======
+async function downloadA3() {
+  const preview = document.getElementById('a3Preview');
   const btn = document.querySelector('.btn-download');
   btn.textContent = '⏳ 生成中...';
   btn.disabled = true;
-
   try {
     if (!window.html2canvas) {
-      await loadScript('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js');
+      await new Promise((res,rej) => {
+        const s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+        s.onload = res; s.onerror = rej; document.head.appendChild(s);
+      });
     }
-
+    // Temporarily reset transform for full resolution capture
+    const origTransform = preview.style.transform;
+    preview.style.transform = 'none';
     const canvas = await html2canvas(preview, {
-      scale: 2,
-      backgroundColor: '#FFFFFF',
-      useCORS: true,
-      logging: false,
+      scale: 2, backgroundColor: '#FFFFFF', useCORS: true, logging: false,
+      width: preview.scrollWidth, height: preview.scrollHeight,
     });
+    preview.style.transform = origTransform;
 
     const link = document.createElement('a');
-    link.download = `宝宝大小_${week}周_${new Date().toISOString().slice(0,10)}.png`;
+    link.download = `宝宝大小_${new Date().toISOString().slice(0,10)}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
-  } catch (e) {
+  } catch(e) {
     console.error(e);
     alert('下载失败，请截图保存');
   }
-
   btn.textContent = '⬇️ 下载图片';
   btn.disabled = false;
 }
-
-function loadScript(src) {
-  return new Promise((resolve, reject) => {
-    const s = document.createElement('script');
-    s.src = src;
-    s.onload = resolve;
-    s.onerror = reject;
-    document.head.appendChild(s);
-  });
-}
 </script>
-
 </body>
 </html>
