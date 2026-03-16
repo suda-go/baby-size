@@ -10,9 +10,6 @@
     --pink-light: #FFF0F5;
     --blue: #7EC8E3;
     --blue-light: #E8F6FD;
-    --green: #95D5B2;
-    --orange: #FFB347;
-    --purple: #C9B1FF;
     --bg: #FFF8FA;
     --text: #3D3D3D;
     --text-light: #888;
@@ -31,7 +28,6 @@
     padding-bottom: 40px;
   }
 
-  /* Header */
   .header {
     text-align: center;
     padding: 40px 20px 20px;
@@ -44,12 +40,8 @@
     -webkit-text-fill-color: transparent;
     margin-bottom: 8px;
   }
-  .header p {
-    color: var(--text-light);
-    font-size: 15px;
-  }
+  .header p { color: var(--text-light); font-size: 15px; }
 
-  /* Input Form */
   .form-section {
     max-width: 520px;
     margin: 24px auto;
@@ -61,15 +53,9 @@
     box-shadow: var(--shadow);
     padding: 24px;
   }
-  .form-card h2 {
-    font-size: 18px;
-    margin-bottom: 16px;
-    color: var(--pink);
-  }
+  .form-card h2 { font-size: 18px; margin-bottom: 16px; color: var(--pink); }
 
-  .input-group {
-    margin-bottom: 14px;
-  }
+  .input-group { margin-bottom: 14px; }
   .input-group label {
     display: flex;
     justify-content: space-between;
@@ -78,32 +64,19 @@
     font-weight: 500;
     margin-bottom: 6px;
   }
-  .input-group label span.unit {
-    color: var(--text-light);
-    font-weight: normal;
-    font-size: 12px;
-  }
-  .input-group label span.full-name {
-    color: var(--text-light);
-    font-weight: normal;
-    font-size: 12px;
-    margin-left: 4px;
-  }
+  .input-group label .unit { color: var(--text-light); font-weight: normal; font-size: 12px; }
+  .input-group label .full-name { color: var(--text-light); font-weight: normal; font-size: 12px; margin-left: 4px; }
   .input-group input {
     width: 100%;
     padding: 10px 14px;
     border: 2px solid #F0F0F0;
     border-radius: 10px;
     font-size: 16px;
-    transition: border-color 0.2s;
     outline: none;
+    transition: border-color 0.2s;
   }
-  .input-group input:focus {
-    border-color: var(--pink);
-  }
-  .input-group input::placeholder {
-    color: #CCC;
-  }
+  .input-group input:focus { border-color: var(--pink); }
+  .input-group input::placeholder { color: #CCC; }
 
   .calc-btn {
     width: 100%;
@@ -118,21 +91,9 @@
     margin-top: 8px;
     transition: transform 0.15s, box-shadow 0.15s;
   }
-  .calc-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(255,107,157,0.35);
-  }
-  .calc-btn:active {
-    transform: translateY(0);
-  }
+  .calc-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,107,157,0.35); }
 
-  /* Quick presets */
-  .presets {
-    display: flex;
-    gap: 8px;
-    margin-top: 12px;
-    flex-wrap: wrap;
-  }
+  .presets { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; align-items: center; }
   .preset-btn {
     padding: 6px 12px;
     background: #F8F8F8;
@@ -143,30 +104,12 @@
     color: var(--text-light);
     transition: all 0.2s;
   }
-  .preset-btn:hover {
-    background: var(--pink-light);
-    color: var(--pink);
-    border-color: var(--pink);
-  }
+  .preset-btn:hover { background: var(--pink-light); color: var(--pink); border-color: var(--pink); }
 
-  /* Result Section */
-  .result-section {
-    max-width: 520px;
-    margin: 0 auto;
-    padding: 0 16px;
-    display: none;
-  }
-  .result-section.show {
-    display: block;
-  }
+  .result-section { max-width: 520px; margin: 0 auto; padding: 0 16px; display: none; }
+  .result-section.show { display: block; }
 
-  /* Info Cards */
-  .info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
   .info-card {
     background: var(--card-bg);
     border-radius: 12px;
@@ -174,22 +117,10 @@
     padding: 16px;
     text-align: center;
   }
-  .info-card .emoji {
-    font-size: 28px;
-    margin-bottom: 6px;
-  }
-  .info-card .value {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--pink);
-  }
-  .info-card .label {
-    font-size: 12px;
-    color: var(--text-light);
-    margin-top: 2px;
-  }
+  .info-card .emoji { font-size: 28px; margin-bottom: 6px; }
+  .info-card .value { font-size: 20px; font-weight: 700; color: var(--pink); }
+  .info-card .label { font-size: 12px; color: var(--text-light); margin-top: 2px; }
 
-  /* Comparison Card */
   .comparison-card {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -198,28 +129,16 @@
     text-align: center;
     margin-bottom: 16px;
   }
-  .comparison-card .fruit-emoji {
-    font-size: 64px;
-    margin: 12px 0;
-    animation: bounce 2s infinite;
-  }
+  .comparison-card .fruit-emoji { font-size: 64px; margin: 12px 0; animation: bounce 2s infinite; }
   @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
   }
-  .comparison-card .message {
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-  .comparison-card .sub-msg {
-    font-size: 14px;
-    color: var(--text-light);
-  }
+  .comparison-card .message { font-size: 17px; font-weight: 600; margin-bottom: 8px; }
+  .comparison-card .sub-msg { font-size: 14px; color: var(--text-light); }
 
-  /* Baby Illustration Card */
-  .baby-card {
+  /* Fetus Image Card */
+  .fetus-card {
     background: var(--card-bg);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -227,29 +146,29 @@
     text-align: center;
     margin-bottom: 16px;
   }
-  .baby-card h3 {
-    font-size: 16px;
-    color: var(--pink);
-    margin-bottom: 12px;
-  }
-  .baby-canvas-wrap {
+  .fetus-card h3 { font-size: 16px; color: var(--pink); margin-bottom: 12px; }
+  .fetus-img-wrap {
     display: inline-block;
     background: #FAFAFA;
     border-radius: 12px;
-    padding: 16px;
+    padding: 12px;
     position: relative;
   }
-  #babyCanvas {
+  .fetus-img-wrap img {
+    max-width: 280px;
+    max-height: 280px;
+    border-radius: 8px;
     display: block;
-    margin: 0 auto;
   }
-  .size-ruler {
-    margin-top: 12px;
+
+  /* Real-size ruler on screen */
+  .ruler-info {
+    margin-top: 10px;
     font-size: 13px;
     color: var(--text-light);
   }
 
-  /* A4 Print Area */
+  /* A4 Print Card */
   .a4-card {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -257,109 +176,151 @@
     padding: 20px;
     margin-bottom: 16px;
   }
-  .a4-card h3 {
-    font-size: 16px;
-    color: var(--pink);
-    margin-bottom: 12px;
-    text-align: center;
-  }
+  .a4-card h3 { font-size: 16px; color: var(--pink); margin-bottom: 12px; text-align: center; }
+
   .a4-preview {
     background: white;
     border: 2px dashed #E0E0E0;
     border-radius: 8px;
-    padding: 24px;
-    min-height: 500px;
+    padding: 20mm;
+    min-height: 260mm;
+    position: relative;
+    font-family: 'PingFang SC', 'Noto Sans SC', sans-serif;
+  }
+  .a4-header {
+    text-align: center;
+    border-bottom: 2px solid var(--pink);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+  .a4-header h2 {
+    font-size: 22px;
+    color: var(--pink);
+    -webkit-text-fill-color: var(--pink);
+  }
+  .a4-header .a4-sub {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  .a4-body {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  /* Left: fetus image with real-size ruler */
+  .a4-left {
+    flex: 0 0 auto;
     position: relative;
   }
-  .a4-preview .a4-title {
-    text-align: center;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--pink);
-    margin-bottom: 4px;
+  .a4-fetus-img {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 8px;
   }
-  .a4-preview .a4-subtitle {
-    text-align: center;
-    font-size: 13px;
-    color: var(--text-light);
+
+  /* Real ruler beside image */
+  .a4-ruler {
+    position: absolute;
+    top: 0;
+    left: -28px;
+    width: 22px;
+    height: 200px;
+    border-right: 1.5px solid #666;
+  }
+  .a4-ruler .cm-mark {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid #999;
+    font-size: 7px;
+    color: #666;
+    line-height: 1;
+  }
+  .a4-ruler .cm-mark .cm-label {
+    position: absolute;
+    left: -2px;
+    top: -7px;
+    font-size: 7px;
+    color: #666;
+    transform: translateX(-100%);
+    padding-right: 2px;
+  }
+
+  /* Right: data */
+  .a4-right {
+    flex: 1;
+  }
+  .a4-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
     margin-bottom: 16px;
   }
-  .a4-preview .a4-baby-area {
-    text-align: center;
-    margin: 20px 0;
-    min-height: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .a4-preview .a4-comparison {
-    text-align: center;
-    margin: 16px 0;
-    padding: 12px;
-    background: #FFF8FA;
-    border-radius: 12px;
-  }
-  .a4-preview .a4-comparison .fruit {
-    font-size: 48px;
-  }
-  .a4-preview .a4-comparison .text {
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 6px;
-  }
-  .a4-preview .a4-stats {
-    display: flex;
-    justify-content: space-around;
-    margin: 16px 0;
-    padding: 12px;
-    background: #F8F8F8;
-    border-radius: 12px;
-  }
-  .a4-preview .a4-stats .stat {
+  .a4-stat {
+    background: #FFF5F8;
+    border-radius: 8px;
+    padding: 10px;
     text-align: center;
   }
-  .a4-preview .a4-stats .stat .val {
+  .a4-stat .s-val {
     font-size: 18px;
     font-weight: 700;
     color: var(--pink);
   }
-  .a4-preview .a4-stats .stat .lbl {
+  .a4-stat .s-lbl {
     font-size: 11px;
     color: var(--text-light);
   }
-  .a4-preview .a4-dev-info {
-    margin-top: 16px;
-    padding: 14px;
-    background: #FFF5F8;
+
+  .a4-compare {
+    text-align: center;
+    padding: 12px;
+    background: #FFF8FA;
     border-radius: 10px;
+    margin-bottom: 12px;
+  }
+  .a4-compare .c-fruit { font-size: 40px; }
+  .a4-compare .c-text { font-size: 15px; font-weight: 600; margin-top: 4px; }
+
+  .a4-dev {
+    padding: 12px;
+    background: #F5FAFF;
+    border-radius: 8px;
     font-size: 13px;
-    line-height: 1.8;
-    color: #666;
+    line-height: 1.7;
+    color: #555;
   }
-  .a4-preview .a4-dev-info h4 {
-    font-size: 14px;
-    color: var(--pink);
-    margin-bottom: 6px;
-  }
-  .a4-preview .a4-footer {
+  .a4-dev h4 { font-size: 13px; color: var(--blue); margin-bottom: 4px; }
+
+  .a4-footer {
     text-align: center;
     margin-top: 20px;
-    font-size: 11px;
+    padding-top: 12px;
+    border-top: 1px solid #EEE;
+    font-size: 10px;
     color: #CCC;
   }
-  .a4-preview .a4-watermark {
+
+  /* Full-width size bar at bottom of A4 */
+  .a4-size-bar {
+    margin-top: 16px;
     text-align: center;
-    margin-top: 8px;
-    font-size: 20px;
-    opacity: 0.3;
+  }
+  .a4-size-bar .size-label {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
+  .a4-size-bar canvas {
+    display: block;
+    margin: 0 auto;
   }
 
   /* Action buttons */
-  .action-btns {
-    display: flex;
-    gap: 12px;
-    margin-top: 12px;
-  }
+  .action-btns { display: flex; gap: 12px; margin-top: 12px; }
   .action-btn {
     flex: 1;
     padding: 12px;
@@ -370,93 +331,32 @@
     cursor: pointer;
     transition: transform 0.15s;
   }
-  .action-btn:hover {
-    transform: translateY(-1px);
-  }
-  .btn-download {
-    background: linear-gradient(135deg, var(--pink), #E876A0);
-    color: white;
-  }
-  .btn-print {
-    background: var(--card-bg);
-    color: var(--pink);
-    border: 2px solid var(--pink) !important;
-  }
+  .action-btn:hover { transform: translateY(-1px); }
+  .btn-download { background: linear-gradient(135deg, var(--pink), #E876A0); color: white; }
+  .btn-print { background: var(--card-bg); color: var(--pink); border: 2px solid var(--pink) !important; }
 
-  /* Footer */
-  .footer {
-    text-align: center;
-    padding: 24px;
-    font-size: 12px;
-    color: #CCC;
-  }
+  .footer { text-align: center; padding: 24px; font-size: 12px; color: #CCC; }
 
   /* Print styles */
   @media print {
-    body { background: white !important; padding: 0 !important; }
+    body { background: white !important; padding: 0 !important; margin: 0 !important; }
     .header, .form-section, .result-section > *:not(#a4PrintCard), .action-btns, .footer { display: none !important; }
     .result-section.show { display: block !important; }
-    #a4PrintCard { box-shadow: none !important; padding: 0 !important; }
-    .a4-preview { border: none !important; padding: 15mm !important; }
+    #a4PrintCard { box-shadow: none !important; padding: 0 !important; margin: 0 !important; }
+    .a4-preview {
+      border: none !important;
+      padding: 15mm !important;
+      min-height: auto !important;
+      margin: 0 !important;
+    }
     .no-print { display: none !important; }
-    /* Ensure colors print */
-    .a4-title { -webkit-text-fill-color: var(--pink) !important; color: var(--pink) !important; }
-    .info-card .value { -webkit-text-fill-color: var(--pink) !important; color: var(--pink) !important; }
+    .a4-header h2, .a4-stat .s-val { -webkit-text-fill-color: var(--pink) !important; color: var(--pink) !important; }
+    @page { size: A4; margin: 0; }
   }
 
-  /* Responsive */
   @media (max-width: 480px) {
     .header h1 { font-size: 22px; }
-    .info-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-    .a4-preview { padding: 16px; }
-  }
-
-  /* Dev info accordion */
-  .dev-section {
-    margin-top: 8px;
-  }
-  .dev-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--pink);
-    padding: 8px 0;
-  }
-  .dev-toggle .arrow {
-    transition: transform 0.3s;
-  }
-  .dev-toggle.open .arrow {
-    transform: rotate(180deg);
-  }
-  .dev-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s;
-  }
-  .dev-content.open {
-    max-height: 800px;
-  }
-  .dev-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    padding: 8px 0;
-  }
-  .dev-item {
-    background: #F8F8F8;
-    border-radius: 8px;
-    padding: 10px;
-  }
-  .dev-item .d-label {
-    font-size: 11px;
-    color: var(--text-light);
-  }
-  .dev-item .d-val {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
+    .a4-body { flex-direction: column; }
   }
 </style>
 </head>
@@ -472,41 +372,26 @@
     <h2>📋 B 超数据输入</h2>
 
     <div class="input-group">
-      <label>
-        <span>双顶径 (BPD) <span class="full-name">胎头最宽处</span></span>
-        <span class="unit">cm</span>
-      </label>
+      <label><span>双顶径 (BPD) <span class="full-name">胎头最宽</span></span><span class="unit">cm</span></label>
       <input type="number" id="bpd" placeholder="例如：5.0" step="0.1" min="1" max="12">
     </div>
-
     <div class="input-group">
-      <label>
-        <span>头围 (HC) <span class="full-name">可选</span></span>
-        <span class="unit">cm</span>
-      </label>
+      <label><span>头围 (HC) <span class="full-name">可选</span></span><span class="unit">cm</span></label>
       <input type="number" id="hc" placeholder="例如：18.0" step="0.1" min="5" max="40">
     </div>
-
     <div class="input-group">
-      <label>
-        <span>腹围 (AC) <span class="full-name">可选</span></span>
-        <span class="unit">cm</span>
-      </label>
+      <label><span>腹围 (AC) <span class="full-name">可选</span></span><span class="unit">cm</span></label>
       <input type="number" id="ac" placeholder="例如：15.0" step="0.1" min="5" max="40">
     </div>
-
     <div class="input-group">
-      <label>
-        <span>股骨长 (FL) <span class="full-name">大腿骨长度</span></span>
-        <span class="unit">cm</span>
-      </label>
+      <label><span>股骨长 (FL) <span class="full-name">大腿骨</span></span><span class="unit">cm</span></label>
       <input type="number" id="fl" placeholder="例如：3.5" step="0.1" min="0.5" max="10">
     </div>
 
     <button class="calc-btn" onclick="calculate()">🦞 看看宝宝有多大</button>
 
     <div class="presets">
-      <span style="font-size:12px;color:#BBB;line-height:28px;">快速填写：</span>
+      <span style="font-size:12px;color:#BBB;line-height:28px;">快速：</span>
       <button class="preset-btn" onclick="fillPreset(12)">12周</button>
       <button class="preset-btn" onclick="fillPreset(16)">16周</button>
       <button class="preset-btn" onclick="fillPreset(20)">20周</button>
@@ -520,19 +405,16 @@
 </div>
 
 <div class="result-section" id="resultSection">
-  <!-- Info Grid -->
   <div class="info-grid" id="infoGrid"></div>
-
-  <!-- Comparison -->
   <div class="comparison-card" id="comparisonCard"></div>
 
-  <!-- Baby Illustration -->
-  <div class="baby-card">
-    <h3>🎨 宝宝示意图</h3>
-    <div class="baby-canvas-wrap">
-      <canvas id="babyCanvas" width="320" height="320"></canvas>
+  <!-- Fetus Image -->
+  <div class="fetus-card">
+    <h3>🎨 宝宝真实照片</h3>
+    <div class="fetus-img-wrap">
+      <img id="fetusImg" src="" alt="宝宝">
     </div>
-    <div class="size-ruler" id="sizeRuler"></div>
+    <div class="ruler-info" id="rulerInfo"></div>
   </div>
 
   <!-- A4 Print Area -->
@@ -541,7 +423,6 @@
     <div class="a4-preview" id="a4Preview"></div>
   </div>
 
-  <!-- Action buttons -->
   <div class="form-section">
     <div class="action-btns no-print">
       <button class="action-btn btn-download" onclick="downloadA4()">⬇️ 下载图片</button>
@@ -550,12 +431,10 @@
   </div>
 </div>
 
-<div class="footer">
-  🦞 宝宝真实大小 · 数据仅供参考 · 请以医生诊断为准
-</div>
+<div class="footer">🦞 宝宝真实大小 · 数据仅供参考 · 请以医生诊断为准</div>
 
 <script>
-// ====== B超参数对照表 (BPD → 孕周/身长/体重) ======
+// ====== Growth data ======
 const GROWTH_TABLE = [
   { week: 12, bpd: 2.0, hc: 7.0,  ac: 5.6,  fl: 0.8,  length: 9,    weight: 14 },
   { week: 13, bpd: 2.4, hc: 8.4,  ac: 6.7,  fl: 1.0,  length: 10,   weight: 23 },
@@ -588,7 +467,15 @@ const GROWTH_TABLE = [
   { week: 40, bpd: 9.5, hc: 32.8, ac: 32.0, fl: 7.5,  length: 51,   weight: 3400 },
 ];
 
-// ====== 参照物数据库 ======
+// ====== AI fetus images for different gestational age ranges ======
+const FETUS_IMAGES = [
+  { maxWeek: 16, src: 'images/fetus_12w.png', desc: '孕早期胎儿' },
+  { maxWeek: 24, src: 'images/fetus_20w.png', desc: '孕中期胎儿' },
+  { maxWeek: 32, src: 'images/fetus_28w.png', desc: '孕晚期胎儿' },
+  { maxWeek: 99, src: 'images/fetus_36w.png', desc: '足月胎儿' },
+];
+
+// ====== Comparison objects ======
 const COMPARISONS = [
   { maxLen: 2,   emoji: '🫘', name: '一颗小豆子', msg: '宝宝还是一颗小豆子呢～' },
   { maxLen: 3,   emoji: '🫐', name: '一颗蓝莓', msg: '你的宝宝像一颗蓝莓那么大！' },
@@ -608,7 +495,6 @@ const COMPARISONS = [
   { maxLen: 99,  emoji: '🎃', name: '一个大南瓜', msg: '你的宝宝已经很大啦！' },
 ];
 
-// ====== 填充预设 ======
 function fillPreset(week) {
   const data = GROWTH_TABLE.find(d => d.week === week);
   if (!data) return;
@@ -619,42 +505,28 @@ function fillPreset(week) {
   calculate();
 }
 
-// ====== 核心计算 ======
 function calculate() {
   const bpd = parseFloat(document.getElementById('bpd').value);
   const hc = parseFloat(document.getElementById('hc').value);
   const ac = parseFloat(document.getElementById('ac').value);
   const fl = parseFloat(document.getElementById('fl').value);
 
-  if (!bpd || bpd <= 0) {
-    alert('请输入双顶径（BPD）！');
-    return;
-  }
+  if (!bpd || bpd <= 0) { alert('请输入双顶径（BPD）！'); return; }
 
-  // 估算孕周
-  let weekData = estimateWeek(bpd, fl, hc, ac);
-  let { week, length, weight, estimatedWeek } = weekData;
+  let result = estimateWeek(bpd, fl, hc, ac);
+  let comp = getComparison(result.length);
+  let fetusImg = getFetusImage(result.week);
 
-  // 参照物
-  let comp = getComparison(length);
-
-  // 显示结果
-  showResults(week, length, weight, comp, bpd, hc, ac, fl);
+  showResults(result, comp, fetusImg, bpd, hc, ac, fl);
 }
 
 function estimateWeek(bpd, fl, hc, ac) {
-  // 用 BPD 查找最接近的孕周
   let bestDiff = Infinity, bestEntry = GROWTH_TABLE[0];
-
   for (let entry of GROWTH_TABLE) {
     let diff = Math.abs(entry.bpd - bpd);
-    if (diff < bestDiff) {
-      bestDiff = diff;
-      bestEntry = entry;
-    }
+    if (diff < bestDiff) { bestDiff = diff; bestEntry = entry; }
   }
 
-  // 精确孕周估算（线性插值）
   let estimatedWeek = bestEntry.week;
   let idx = GROWTH_TABLE.indexOf(bestEntry);
   if (idx < GROWTH_TABLE.length - 1 && idx > 0) {
@@ -669,25 +541,17 @@ function estimateWeek(bpd, fl, hc, ac) {
     }
   }
 
-  // 估算身长（基于孕周）
   let length = bestEntry.length;
   let weight = bestEntry.weight;
 
-  // 如果有FL，用 FL 辅助修正身长（FL * 7 ≈ 身长）
   if (fl && fl > 0) {
     let flLength = fl * 7;
     length = Math.round((length + flLength) / 2);
   }
 
-  // 体重估算 Hadlock 公式简化版
-  if (bpd && ac && fl) {
+  if (hc && ac && fl) {
     let logWeight = 1.326 + 0.0107 * hc + 0.0438 * ac + 0.158 * fl - 0.00326 * ac * fl;
-    if (hc && hc > 0) {
-      weight = Math.round(Math.pow(10, logWeight));
-    } else {
-      // 没有HC，简化公式
-      weight = Math.round(Math.pow(10, 1.113 + 0.058 * bpd + 0.043 * ac - 0.0002 * ac * fl));
-    }
+    weight = Math.round(Math.pow(10, logWeight));
   }
 
   return { week: bestEntry.week, estimatedWeek, length, weight };
@@ -700,434 +564,161 @@ function getComparison(length) {
   return COMPARISONS[COMPARISONS.length - 1];
 }
 
-// ====== 显示结果 ======
-function showResults(week, length, weight, comp, bpd, hc, ac, fl) {
+function getFetusImage(week) {
+  for (let img of FETUS_IMAGES) {
+    if (week <= img.maxWeek) return img;
+  }
+  return FETUS_IMAGES[FETUS_IMAGES.length - 1];
+}
+
+function showResults(result, comp, fetusImg, bpd, hc, ac, fl) {
   const section = document.getElementById('resultSection');
   section.classList.add('show');
 
-  // 信息卡片
-  const infoGrid = document.getElementById('infoGrid');
-  const gestWeek = Math.round(week);
-  infoGrid.innerHTML = `
-    <div class="info-card">
-      <div class="emoji">📅</div>
-      <div class="value">${gestWeek}周</div>
-      <div class="label">估计孕周</div>
-    </div>
-    <div class="info-card">
-      <div class="emoji">📏</div>
-      <div class="value">${length} cm</div>
-      <div class="label">估计身长</div>
-    </div>
-    <div class="info-card">
-      <div class="emoji">⚖️</div>
-      <div class="value">${weight >= 1000 ? (weight/1000).toFixed(1) + ' kg' : weight + ' g'}</div>
-      <div class="label">估计体重</div>
-    </div>
-    <div class="info-card">
-      <div class="emoji">${comp.emoji}</div>
-      <div class="value">${comp.name}</div>
-      <div class="label">真实大小参照</div>
-    </div>
+  const gestWeek = Math.round(result.week);
+  const { length, weight } = result;
+
+  // Info cards
+  document.getElementById('infoGrid').innerHTML = `
+    <div class="info-card"><div class="emoji">📅</div><div class="value">${gestWeek}周</div><div class="label">估计孕周</div></div>
+    <div class="info-card"><div class="emoji">📏</div><div class="value">${length} cm</div><div class="label">估计身长</div></div>
+    <div class="info-card"><div class="emoji">⚖️</div><div class="value">${weight >= 1000 ? (weight/1000).toFixed(1) + ' kg' : weight + ' g'}</div><div class="label">估计体重</div></div>
+    <div class="info-card"><div class="emoji">${comp.emoji}</div><div class="value">${comp.name}</div><div class="label">真实大小参照</div></div>
   `;
 
-  // 对比卡片
-  const compCard = document.getElementById('comparisonCard');
-  compCard.innerHTML = `
+  // Comparison
+  document.getElementById('comparisonCard').innerHTML = `
     <div class="fruit-emoji">${comp.emoji}</div>
     <div class="message">${comp.msg}</div>
     <div class="sub-msg">身长约 ${length} cm，体重约 ${weight >= 1000 ? (weight/1000).toFixed(1) + ' 千克' : weight + ' 克'}</div>
   `;
 
-  // 画宝宝示意图
-  drawBaby(length, week);
+  // Fetus image
+  const imgEl = document.getElementById('fetusImg');
+  imgEl.src = fetusImg.src;
+  imgEl.alt = fetusImg.desc;
+  document.getElementById('rulerInfo').textContent = `${fetusImg.desc} · ${gestWeek}周 · 约 ${length} cm`;
 
-  // 尺寸标尺
-  document.getElementById('sizeRuler').textContent = `实际长度约 ${length} cm — ${comp.name}`;
+  // A4 preview
+  generateA4(gestWeek, length, weight, comp, bpd, hc, ac, fl, fetusImg);
 
-  // 生成 A4 预览
-  generateA4(week, length, weight, comp, bpd, hc, ac, fl);
-
-  // 滚动到结果
   section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ====== Canvas 绘制可爱胎儿 ======
-function drawBaby(length, week) {
-  const canvas = document.getElementById('babyCanvas');
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
-
-  ctx.clearRect(0, 0, W, H);
-
-  // 缩放比例：让宝宝占画布的比例随实际大小变化
-  const scale = Math.min(1.5, 0.3 + (length / 51) * 1.2);
-  const centerX = W / 2;
-  const centerY = H / 2;
-
-  ctx.save();
-  ctx.translate(centerX, centerY);
-  ctx.scale(scale, scale);
-
-  // 胎儿颜色
-  const skinColor = '#FFB6A3';
-  const cheekColor = '#FF8E8E';
-  const outlineColor = '#E8847A';
-
-  // 根据孕周决定绘制风格
-  if (week < 16) {
-    // 早期：简单椭圆小人
-    drawEarlyBaby(ctx, skinColor, outlineColor, cheekColor);
-  } else if (week < 24) {
-    // 中期：有轮廓的小人
-    drawMidBaby(ctx, skinColor, outlineColor, cheekColor);
-  } else {
-    // 晚期：更完整的小人
-    drawLateBaby(ctx, skinColor, outlineColor, cheekColor);
-  }
-
-  ctx.restore();
-}
-
-function drawEarlyBaby(ctx, skin, outline, cheek) {
-  // 身体（蜷缩的椭圆）
-  ctx.beginPath();
-  ctx.ellipse(0, 10, 28, 35, 0, 0, Math.PI * 2);
-  ctx.fillStyle = skin;
-  ctx.fill();
-  ctx.strokeStyle = outline;
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  // 头
-  ctx.beginPath();
-  ctx.ellipse(0, -25, 22, 20, 0, 0, Math.PI * 2);
-  ctx.fillStyle = skin;
-  ctx.fill();
-  ctx.stroke();
-
-  // 眼睛（闭着的）
-  ctx.beginPath();
-  ctx.arc(-7, -27, 2.5, 0, Math.PI, false);
-  ctx.strokeStyle = outline;
-  ctx.lineWidth = 2;
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(7, -27, 2.5, 0, Math.PI, false);
-  ctx.stroke();
-
-  // 嘴巴（微笑）
-  ctx.beginPath();
-  ctx.arc(0, -21, 5, 0.1, Math.PI - 0.1, false);
-  ctx.strokeStyle = outline;
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  // 腮红
-  ctx.fillStyle = cheek;
-  ctx.globalAlpha = 0.4;
-  ctx.beginPath();
-  ctx.ellipse(-14, -21, 5, 3, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.ellipse(14, -21, 5, 3, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.globalAlpha = 1;
-
-  // 手（蜷缩的小圆点）
-  ctx.beginPath();
-  ctx.ellipse(-20, 15, 6, 5, -0.3, 0, Math.PI * 2);
-  ctx.fillStyle = skin;
-  ctx.fill();
-  ctx.strokeStyle = outline;
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.ellipse(20, 15, 6, 5, 0.3, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.stroke();
-
-  // 小尾巴（蜷缩的腿）
-  ctx.beginPath();
-  ctx.ellipse(0, 40, 15, 10, 0, 0, Math.PI);
-  ctx.fillStyle = skin;
-  ctx.fill();
-  ctx.strokeStyle = outline;
-  ctx.lineWidth = 2;
-  ctx.stroke();
-}
-
-function drawMidBaby(ctx, skin, outline, cheek) {
-  // 背部弧线（蜷缩姿势）
-  ctx.beginPath();
-  ctx.moveTo(-30, -10);
-  ctx.quadraticCurveTo(-35, 30, -15, 50);
-  ctx.quadraticCurveTo(0, 60, 15, 50);
-  ctx.quadraticCurveTo(35, 30, 30, -10);
-  ctx.quadraticCurveTo(25, -35, 0, -40);
-  ctx.quadraticCurveTo(-25, -35, -30, -10);
-  ctx.fillStyle = skin;
-  ctx.fill();
-  ctx.strokeStyle = outline;
-  ctx.lineWidth = 2.5;
-  ctx.stroke();
-
-  // 头（较大的比例）
-  ctx.beginPath();
-  ctx.ellipse(0, -35, 28, 25, 0, 0, Math.PI * 2);
-  ctx.fillStyle = skin;
-  ctx.fill();
-  ctx.stroke();
-
-  // 胳膊
-  ctx.beginPath();
-  ctx.moveTo(-25, -5);
-  ctx.quadraticCurveTo(-40, 5, -35, 20);
-  ctx.quadraticCurveTo(-32, 28, -25, 25);
-  ctx.strokeStyle = outline;
-  ctx.lineWidth = 3;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(25, -5);
-  ctx.quadraticCurveTo(40, 5, 35, 20);
-  ctx.quadraticCurveTo(32, 28, 25, 25);
-  ctx.stroke();
-
-  // 腿蜷缩
-  ctx.beginPath();
-  ctx.moveTo(-12, 45);
-  ctx.quadraticCurveTo(-20, 58, -10, 62);
-  ctx.lineWidth = 3;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(12, 45);
-  ctx.quadraticCurveTo(20, 58, 10, 62);
-  ctx.stroke();
-
-  // 眼睛（闭着）
-  ctx.beginPath();
-  ctx.arc(-9, -37, 3, 0, Math.PI, false);
-  ctx.lineWidth = 2;
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(9, -37, 3, 0, Math.PI, false);
-  ctx.stroke();
-
-  // 微笑
-  ctx.beginPath();
-  ctx.arc(0, -29, 6, 0.15, Math.PI - 0.15, false);
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  // 腮红
-  ctx.fillStyle = cheek;
-  ctx.globalAlpha = 0.35;
-  ctx.beginPath();
-  ctx.ellipse(-18, -31, 5, 3.5, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.ellipse(18, -31, 5, 3.5, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.globalAlpha = 1;
-
-  // 脐带
-  ctx.beginPath();
-  ctx.moveTo(5, 30);
-  ctx.quadraticCurveTo(20, 35, 18, 20);
-  ctx.strokeStyle = '#E0A899';
-  ctx.lineWidth = 2;
-  ctx.setLineDash([3, 3]);
-  ctx.stroke();
-  ctx.setLineDash([]);
-}
-
-function drawLateBaby(ctx, skin, outline, cheek) {
-  // 蜷缩的姿势，更完整的细节
-  // 身体
-  ctx.beginPath();
-  ctx.moveTo(-35, -5);
-  ctx.quadraticCurveTo(-42, 35, -20, 55);
-  ctx.quadraticCurveTo(0, 68, 20, 55);
-  ctx.quadraticCurveTo(42, 35, 35, -5);
-  ctx.quadraticCurveTo(30, -35, 0, -42);
-  ctx.quadraticCurveTo(-30, -35, -35, -5);
-  ctx.fillStyle = skin;
-  ctx.fill();
-  ctx.strokeStyle = outline;
-  ctx.lineWidth = 2.5;
-  ctx.stroke();
-
-  // 头
-  ctx.beginPath();
-  ctx.ellipse(0, -38, 32, 28, 0, 0, Math.PI * 2);
-  ctx.fillStyle = skin;
-  ctx.fill();
-  ctx.stroke();
-
-  // 头发（几根小绒毛）
-  ctx.strokeStyle = '#E8847A';
-  ctx.lineWidth = 1.5;
-  for (let i = -2; i <= 2; i++) {
-    ctx.beginPath();
-    ctx.moveTo(i * 5, -63);
-    ctx.quadraticCurveTo(i * 6, -68, i * 4, -66);
-    ctx.stroke();
-  }
-
-  // 胳膊（更清晰）
-  ctx.beginPath();
-  ctx.moveTo(-30, 0);
-  ctx.quadraticCurveTo(-48, 10, -42, 28);
-  ctx.quadraticCurveTo(-38, 38, -30, 32);
-  ctx.strokeStyle = outline;
-  ctx.lineWidth = 3.5;
-  ctx.stroke();
-
-  // 手指
-  ctx.beginPath();
-  ctx.moveTo(-42, 28);
-  ctx.quadraticCurveTo(-46, 32, -43, 35);
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(30, 0);
-  ctx.quadraticCurveTo(48, 10, 42, 28);
-  ctx.quadraticCurveTo(38, 38, 30, 32);
-  ctx.lineWidth = 3.5;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(42, 28);
-  ctx.quadraticCurveTo(46, 32, 43, 35);
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  // 腿
-  ctx.beginPath();
-  ctx.moveTo(-15, 50);
-  ctx.quadraticCurveTo(-25, 65, -18, 70);
-  ctx.strokeStyle = outline;
-  ctx.lineWidth = 3.5;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(15, 50);
-  ctx.quadraticCurveTo(25, 65, 18, 70);
-  ctx.stroke();
-
-  // 脚趾
-  ctx.beginPath();
-  ctx.moveTo(-18, 70);
-  ctx.quadraticCurveTo(-22, 74, -16, 75);
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  ctx.beginPath();
-  ctx.moveTo(18, 70);
-  ctx.quadraticCurveTo(22, 74, 16, 75);
-  ctx.stroke();
-
-  // 眼睛
-  ctx.beginPath();
-  ctx.arc(-10, -40, 3.5, 0, Math.PI, false);
-  ctx.lineWidth = 2.5;
-  ctx.stroke();
-  ctx.beginPath();
-  ctx.arc(10, -40, 3.5, 0, Math.PI, false);
-  ctx.stroke();
-
-  // 微笑
-  ctx.beginPath();
-  ctx.arc(0, -32, 7, 0.15, Math.PI - 0.15, false);
-  ctx.lineWidth = 1.5;
-  ctx.stroke();
-
-  // 腮红
-  ctx.fillStyle = cheek;
-  ctx.globalAlpha = 0.3;
-  ctx.beginPath();
-  ctx.ellipse(-20, -33, 6, 4, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.ellipse(20, -33, 6, 4, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.globalAlpha = 1;
-
-  // 脐带
-  ctx.beginPath();
-  ctx.moveTo(8, 35);
-  ctx.quadraticCurveTo(28, 42, 22, 22);
-  ctx.strokeStyle = '#E0A899';
-  ctx.lineWidth = 2.5;
-  ctx.setLineDash([4, 3]);
-  ctx.stroke();
-  ctx.setLineDash([]);
-}
-
-// ====== A4 预览生成 ======
-function generateA4(week, length, weight, comp, bpd, hc, ac, fl) {
-  const gestWeek = Math.round(week);
+// ====== Generate A4 preview with real-size ruler ======
+function generateA4(week, length, weight, comp, bpd, hc, ac, fl, fetusImg) {
   const preview = document.getElementById('a4Preview');
+  const devInfo = getDevInfo(week);
+  const weightStr = weight >= 1000 ? (weight/1000).toFixed(1) + ' kg' : weight + ' g';
 
-  // 发育信息
-  const devInfo = getDevInfo(gestWeek);
+  // Calculate how many pixels = 1cm on screen (assuming 96dpi, 1cm = ~37.8px)
+  // For A4 print, we use CSS mm units which are accurate
+  // Show ruler up to the fetus length (max 55cm, but cap display at reasonable height)
+  const displayCm = Math.min(length, 55);
 
   preview.innerHTML = `
-    <div class="a4-title">🍼 你的宝宝 ${gestWeek} 周啦！</div>
-    <div class="a4-subtitle">宝宝真实大小纪念卡 · 留住这一刻</div>
-
-    <div class="a4-baby-area">
-      <canvas id="a4BabyCanvas" width="280" height="280"></canvas>
+    <div class="a4-header">
+      <h2>🍼 你的宝宝 ${week} 周啦！</h2>
+      <div class="a4-sub">宝宝真实大小纪念卡 · ${new Date().toLocaleDateString('zh-CN')}</div>
     </div>
 
-    <div class="a4-comparison">
-      <div class="fruit">${comp.emoji}</div>
-      <div class="text">${comp.msg}</div>
+    <div class="a4-body">
+      <div class="a4-left" style="position:relative; padding-left: 28px;">
+        <!-- Real-size ruler -->
+        <div class="a4-ruler" id="a4Ruler" style="height:${displayCm * 10}px;"></div>
+        <!-- Fetus image -->
+        <img class="a4-fetus-img" src="${fetusImg.src}" alt="${fetusImg.desc}" style="height:${Math.min(200, displayCm * 4)}px;">
+      </div>
+      <div class="a4-right">
+        <div class="a4-stats-grid">
+          <div class="a4-stat"><div class="s-val">${week}周</div><div class="s-lbl">孕周</div></div>
+          <div class="a4-stat"><div class="s-val">${length} cm</div><div class="s-lbl">身长</div></div>
+          <div class="a4-stat"><div class="s-val">${weightStr}</div><div class="s-lbl">体重</div></div>
+          <div class="a4-stat"><div class="s-val">${bpd} cm</div><div class="s-lbl">双顶径</div></div>
+          ${hc ? `<div class="a4-stat"><div class="s-val">${hc} cm</div><div class="s-lbl">头围</div></div>` : ''}
+          ${ac ? `<div class="a4-stat"><div class="s-val">${ac} cm</div><div class="s-lbl">腹围</div></div>` : ''}
+          ${fl ? `<div class="a4-stat"><div class="s-val">${fl} cm</div><div class="s-lbl">股骨长</div></div>` : ''}
+        </div>
+        <div class="a4-compare">
+          <div class="c-fruit">${comp.emoji}</div>
+          <div class="c-text">${comp.msg}</div>
+        </div>
+        <div class="a4-dev">
+          <h4>🌱 发育小贴士</h4>
+          ${devInfo}
+        </div>
+      </div>
     </div>
 
-    <div class="a4-stats">
-      <div class="stat">
-        <div class="val">${gestWeek}周</div>
-        <div class="lbl">孕周</div>
-      </div>
-      <div class="stat">
-        <div class="val">${length} cm</div>
-        <div class="lbl">身长</div>
-      </div>
-      <div class="stat">
-        <div class="val">${weight >= 1000 ? (weight/1000).toFixed(1) + ' kg' : weight + ' g'}</div>
-        <div class="lbl">体重</div>
-      </div>
-      <div class="stat">
-        <div class="val">${bpd} cm</div>
-        <div class="lbl">双顶径</div>
-      </div>
-    </div>
-
-    <div class="a4-dev-info">
-      <h4>🌱 发育小贴士</h4>
-      ${devInfo}
+    <div class="a4-size-bar">
+      <div class="size-label">📏 真实尺寸标尺（打印后为实际厘米）</div>
+      <canvas id="rulerCanvas" width="500" height="40"></canvas>
     </div>
 
     <div class="a4-footer">
-      🦞 宝宝真实大小 · 数据仅供参考 · 请以医生诊断为准<br>
-      生成时间：${new Date().toLocaleDateString('zh-CN')}
+      🦞 宝宝真实大小 · 数据仅供参考 · 请以医生诊断为准 · ${new Date().toLocaleDateString('zh-CN')}
     </div>
-    <div class="a4-watermark">🦞</div>
   `;
 
-  // 画A4版本的宝宝
-  const a4Canvas = document.getElementById('a4BabyCanvas');
-  const a4Ctx = a4Canvas.getContext('2d');
-  a4Ctx.drawImage(document.getElementById('babyCanvas'), 0, 0, 280, 280);
+  // Draw ruler marks on the side ruler
+  drawSideRuler(displayCm);
+
+  // Draw horizontal cm ruler at bottom
+  drawHorizontalRuler(Math.min(length + 5, 55));
+}
+
+function drawSideRuler(maxCm) {
+  const ruler = document.getElementById('a4Ruler');
+  if (!ruler) return;
+  ruler.innerHTML = '';
+  for (let i = 0; i <= maxCm; i++) {
+    const mark = document.createElement('div');
+    mark.className = 'cm-mark';
+    mark.style.top = (i * 10) + 'px';
+    if (i % 2 === 0) {
+      mark.innerHTML = `<span class="cm-label">${i}</span>`;
+    }
+    ruler.appendChild(mark);
+  }
+}
+
+function drawHorizontalRuler(maxCm) {
+  const canvas = document.getElementById('rulerCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+
+  // Scale: W pixels = maxCm cm
+  const pxPerCm = (W - 20) / maxCm;
+
+  ctx.strokeStyle = '#666';
+  ctx.fillStyle = '#666';
+  ctx.lineWidth = 1;
+  ctx.font = '10px sans-serif';
+
+  // Main line
+  ctx.beginPath();
+  ctx.moveTo(10, 20);
+  ctx.lineTo(10 + maxCm * pxPerCm, 20);
+  ctx.stroke();
+
+  for (let i = 0; i <= maxCm; i++) {
+    const x = 10 + i * pxPerCm;
+    const tickH = (i % 5 === 0) ? 12 : 6;
+    ctx.beginPath();
+    ctx.moveTo(x, 20);
+    ctx.lineTo(x, 20 - tickH);
+    ctx.stroke();
+    if (i % 2 === 0) {
+      ctx.fillText(i + 'cm', x - 8, 35);
+    }
+  }
 }
 
 function getDevInfo(week) {
   const infos = {
-    12: '宝宝开始有反射动作了！手指和脚趾已经分开，可以握拳。大脑发育非常迅速。',
+    12: '宝宝开始有反射动作了！手指和脚趾已经分开，可以握拳。',
     13: '宝宝开始长出细小的指纹，独一无二的身份标识正在形成。',
     14: '宝宝可以做鬼脸啦！皱眉、微笑的面部表情开始出现。',
     15: '宝宝能感受到光线了，虽然眼睛还闭着，但对光有反应。',
@@ -1160,7 +751,7 @@ function getDevInfo(week) {
   return infos[week] || infos[40];
 }
 
-// ====== 下载 A4 ======
+// ====== Download A4 ======
 async function downloadA4() {
   const preview = document.getElementById('a4Preview');
   const btn = document.querySelector('.btn-download');
@@ -1168,7 +759,6 @@ async function downloadA4() {
   btn.disabled = true;
 
   try {
-    // 动态加载 html2canvas
     if (!window.html2canvas) {
       await loadScript('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js');
     }
@@ -1181,7 +771,7 @@ async function downloadA4() {
     });
 
     const link = document.createElement('a');
-    link.download = `宝宝大小_${new Date().toISOString().slice(0,10)}.png`;
+    link.download = `宝宝大小_${week}周_${new Date().toISOString().slice(0,10)}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
   } catch (e) {
